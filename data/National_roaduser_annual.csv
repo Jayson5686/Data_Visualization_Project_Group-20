@@ -1,0 +1,133 @@
+Year,RoadUser,Hospitalisations,BedDays
+2011,Bus occupant,214,752
+2011,Car driver,10948,47774
+2011,Car passenger,4853,21958
+2011,Car unknown position,889,4000
+2011,Heavy transport driver,455,2022
+2011,Heavy transport passenger,52,290
+2011,Heavy transport unknown position,55,250
+2011,Motorcyclist,7565,37573
+2011,Other or unknown,610,2684
+2011,Pedal cyclist,5391,15198
+2011,Pedestrian,2754,20924
+2011,Pick-up truck or van occupant,247,1248
+2012,Bus occupant,217,889
+2012,Car driver,10806,47339
+2012,Car passenger,4738,20775
+2012,Car unknown position,895,3961
+2012,Heavy transport driver,416,2016
+2012,Heavy transport passenger,47,226
+2012,Heavy transport unknown position,48,170
+2012,Motorcyclist,7728,37524
+2012,Other or unknown,563,2577
+2012,Pedal cyclist,5621,15709
+2012,Pedestrian,2672,19147
+2012,Pick-up truck or van occupant,273,1462
+2013,Bus occupant,226,978
+2013,Car driver,10942,42339
+2013,Car passenger,4828,19791
+2013,Car unknown position,818,3196
+2013,Heavy transport driver,415,2288
+2013,Heavy transport passenger,40,179
+2013,Heavy transport unknown position,29,72
+2013,Motorcyclist,8018,37629
+2013,Other or unknown,536,2483
+2013,Pedal cyclist,6262,17273
+2013,Pedestrian,2657,18320
+2013,Pick-up truck or van occupant,230,1350
+2014,Bus occupant,289,1472
+2014,Car driver,11122,41877
+2014,Car passenger,4625,19717
+2014,Car unknown position,728,2823
+2014,Heavy transport driver,377,1860
+2014,Heavy transport passenger,55,459
+2014,Heavy transport unknown position,48,249
+2014,Motorcyclist,8334,36300
+2014,Other or unknown,508,1844
+2014,Pedal cyclist,6636,17457
+2014,Pedestrian,2554,17833
+2014,Pick-up truck or van occupant,239,1089
+2015,Bus occupant,246,1462
+2015,Car driver,12163,57932
+2015,Car passenger,4958,24600
+2015,Car unknown position,812,4731
+2015,Heavy transport driver,444,2366
+2015,Heavy transport passenger,43,336
+2015,Heavy transport unknown position,23,213
+2015,Motorcyclist,8298,44910
+2015,Other or unknown,503,2530
+2015,Pedal cyclist,6716,18986
+2015,Pedestrian,2627,22384
+2015,Pick-up truck or van occupant,249,1380
+2016,Bus occupant,283,1823
+2016,Car driver,13194,69403
+2016,Car passenger,5103,26908
+2016,Car unknown position,808,5193
+2016,Heavy transport driver,403,3204
+2016,Heavy transport passenger,42,273
+2016,Heavy transport unknown position,39,376
+2016,Motorcyclist,8526,53225
+2016,Other or unknown,620,3971
+2016,Pedal cyclist,6904,20646
+2016,Pedestrian,2743,30493
+2016,Pick-up truck or van occupant,298,2250
+2017,Bus occupant,265,1533
+2017,Car driver,13267,63518
+2017,Car passenger,5102,24820
+2017,Car unknown position,777,6560
+2017,Heavy transport driver,447,2727
+2017,Heavy transport passenger,49,252
+2017,Heavy transport unknown position,32,102
+2017,Motorcyclist,8739,52765
+2017,Other or unknown,600,4108
+2017,Pedal cyclist,7076,21590
+2017,Pedestrian,2714,31475
+2017,Pick-up truck or van occupant,271,1839
+2018,Bus occupant,247,1506
+2018,Car driver,13595,63490
+2018,Car passenger,5206,26559
+2018,Car unknown position,864,7588
+2018,Heavy transport driver,437,2732
+2018,Heavy transport passenger,69,217
+2018,Heavy transport unknown position,47,607
+2018,Motorcyclist,8623,51158
+2018,Other or unknown,603,4398
+2018,Pedal cyclist,6959,20748
+2018,Pedestrian,2661,26445
+2018,Pick-up truck or van occupant,279,1894
+2019,Bus occupant,255,933
+2019,Car driver,13482,61517
+2019,Car passenger,4989,24122
+2019,Car unknown position,797,6297
+2019,Heavy transport driver,425,2711
+2019,Heavy transport passenger,52,282
+2019,Heavy transport unknown position,47,557
+2019,Motorcyclist,8924,53831
+2019,Other or unknown,620,4840
+2019,Pedal cyclist,7302,22862
+2019,Pedestrian,2713,28389
+2019,Pick-up truck or van occupant,260,1374
+2020,Bus occupant,173,843
+2020,Car driver,12217,54982
+2020,Car passenger,4344,23502
+2020,Car unknown position,731,5710
+2020,Heavy transport driver,412,2524
+2020,Heavy transport passenger,48,399
+2020,Heavy transport unknown position,40,222
+2020,Motorcyclist,8684,47676
+2020,Other or unknown,582,3664
+2020,Pedal cyclist,8332,24634
+2020,Pedestrian,2103,21474
+2020,Pick-up truck or van occupant,300,1536
+2021,Bus occupant,169,753
+2021,Car driver,13327,61404
+2021,Car passenger,4495,21470
+2021,Car unknown position,717,6762
+2021,Heavy transport driver,383,2473
+2021,Heavy transport passenger,56,237
+2021,Heavy transport unknown position,36,161
+2021,Motorcyclist,8883,49921
+2021,Other or unknown,601,4280
+2021,Pedal cyclist,8163,26765
+2021,Pedestrian,2334,22733
+2021,Pick-up truck or van occupant,341,1975
