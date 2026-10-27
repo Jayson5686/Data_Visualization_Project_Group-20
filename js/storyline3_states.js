@@ -1,6 +1,6 @@
 /**
  * Storyline 3: State and Territory Patterns
- * Dual-Pane Architecture (bikerental.webp style):
+ * Dual-Pane Architecture 
  * Left Dark Matrix Pane (Heatmap) + Right Alabaster Trajectory & Journey Cards Pane
  */
 
@@ -193,7 +193,7 @@ function initStoryline3(stateData) {
       metaSummary.innerHTML = `11-Year Total: <strong>${window.formatNumber(totalStateHosp)}</strong> Admissions · <strong>${window.formatNumber(totalStateBeds)}</strong> Bed Days`;
     }
 
-    // Update Dark Journey Milestone Cards (bikerental.webp "Latest journeys" cards)
+    // Update Dark Journey Milestone Cards 
     const d2011 = filtered.find(d => d.Year === 2011);
     const d2019 = filtered.find(d => d.Year === 2019);
     const d2020 = filtered.find(d => d.Year === 2020);

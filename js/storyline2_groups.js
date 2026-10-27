@@ -1,7 +1,7 @@
 /**
  * Storyline 2: Road-User and Age-Group Patterns
  * Dual Linked Bento Views: Sorted Horizontal Bars (Road Users) + Chronological Vertical Bars (Age Groups)
- * Styled after dashboarddesign.webp ("Product view" active emerald gradient bar + dark pill callout)
+ * ("Product view" active emerald gradient bar + dark pill callout)
  */
 
 function initStoryline2(roadUserData, ageData) {
@@ -40,7 +40,7 @@ function initStoryline2(roadUserData, ageData) {
     .attr('transform', `translate(0,${heightUsers})`);
   const yUsersAxisGroup = gUsers.append('g').attr('class', 'axis axis-y');
 
-  // 2. Setup Age Groups Chart (Vertical Bar Chart — dashboarddesign.webp "Product view" style)
+  // 2. Setup Age Groups Chart (Vertical Bar Chart）
   const marginAge = { top: 36, right: 20, bottom: 56, left: 52 };
   const widthAge = 460 - marginAge.left - marginAge.right;
   const heightAge = 430 - marginAge.top - marginAge.bottom;
@@ -172,7 +172,7 @@ function initStoryline2(roadUserData, ageData) {
       });
 
     // ------------------------------------------------------------------------
-    // B. Age Groups Vertical Bars (dashboarddesign.webp "Product view" style)
+    // B. Age Groups Vertical Bars 
     // ------------------------------------------------------------------------
     let yearAge = ageData.filter(d => d.Year === activeYear);
     const ageMap = new Map(yearAge.map(d => [d.AgeGroup, d]));
@@ -252,7 +252,7 @@ function initStoryline2(roadUserData, ageData) {
       exit => exit.remove()
     );
 
-    // Render dashboarddesign.webp signature dark pill callout above the peak bar
+    //  Signature dark pill callout above the peak bar
     peakCalloutGroup.selectAll('*').remove();
     if (peakAgeObj && peakAgeObj[activeMeasure] > 0) {
       const px = xAgeScale(peakAgeObj.AgeGroup) + xAgeScale.bandwidth() / 2;
