@@ -1,11 +1,3 @@
-/* ==========================================================================
-   CrashMetrics Australia — Component & Visualization Styles
-   Tactile Bento Cards, Dual-Pane Split View (bikerental.webp), & Clean SVG Charts
-   ========================================================================== */
-
-/* ==========================================================================
-   Global Floating Tooltip (bikerental.webp & dashboarddesign.webp Pill Card)
-   ========================================================================== */
 #global-tooltip {
   position: fixed;
   z-index: 10000;
@@ -216,7 +208,7 @@
 }
 
 /* ==========================================================================
-   Storyline 3: Dual-Pane Dark Matrix + Light Trajectory Panel (bikerental.webp)
+   Storyline 3: Dual-Pane Dark Matrix + Light Trajectory Panel 
    ========================================================================== */
 .bento-split-shell {
   padding: 0.65rem;
@@ -339,7 +331,7 @@
   flex-shrink: 0;
 }
 
-/* Right Light Alabaster Detail Pane (bikerental.webp Right Panel) */
+/* Right Light Alabaster Detail Pane */
 .split-light-pane {
   background: #EAE9E4;
   border-radius: 22px;
@@ -421,7 +413,7 @@
   color: var(--ink-primary);
 }
 
-/* Dark Charcoal Journey Cards (bikerental.webp "Latest journeys" exact match) */
+/* Dark Charcoal Journey Cards  */
 .journey-cards-section {
   display: flex;
   flex-direction: column;
@@ -528,7 +520,7 @@
 }
 
 /* ==========================================================================
-   Storyline 4: Top Architectural Row & Contrast Block (enviromentaldesign.webp)
+   Storyline 4: Top Architectural Row & Contrast Block 
    ========================================================================== */
 .fn-top-bento-row {
   display: grid;

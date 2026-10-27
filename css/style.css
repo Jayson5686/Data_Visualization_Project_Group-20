@@ -1,8 +1,3 @@
-/* ==========================================================================
-   CrashMetrics Australia — COS30045 Data Visualisation
-   Design System: Atmospheric Framed Hero (designsample3.mp4 / webdesign.webp)
-   + Tactile Alabaster & Charcoal Bento Workspace (dashboarddesign.webp / bikerental.webp)
-   ========================================================================== */
 
 :root {
   /* Outer & Tactile Workspace Surfaces */
@@ -26,7 +21,7 @@
   --ink-on-dark: #F8FAFC;
   --ink-on-dark-muted: #94A3B8;
 
-  /* Accents & Semantic Badge Tokens (dashboarddesign.webp & bikerental.webp) */
+  /* Accents & Semantic Badge Tokens  */
   --accent-amber: #F59E0B;
   --accent-amber-deep: #D97706;
   --accent-emerald: #10B981;
@@ -40,7 +35,7 @@
   --pill-amber-bg: #FFF4D6;
   --pill-amber-text: #B45309;
 
-  /* Typography Families (No programmer monospace!) */
+  /* Typography Families  */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
 
@@ -84,7 +79,7 @@ body {
 }
 
 /* ==========================================================================
-   Preloader Overlay (designsample3.mp4 Framed Counter Style)
+   Preloader Overlay (Framed Counter Style)
    ========================================================================== */
 #preloader {
   position: fixed;
@@ -544,7 +539,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Lower Architectural 3-Column Bento Strip (webdesign.webp bottom strip) */
+/* Lower Architectural 3-Column Bento Strip */
 .hero-bento-strip {
   display: grid;
   grid-template-columns: 1.35fr 0.85fr 1fr;
@@ -875,7 +870,7 @@ body {
 }
 
 /* ==========================================================================
-   Overview Inset Tray (Exact dashboarddesign.webp "Overview" nested cards)
+   Overview Inset Tray (Exact "Overview" nested cards)
    ========================================================================== */
 .overview-inset-tray {
   background: var(--bg-card-recessed);
