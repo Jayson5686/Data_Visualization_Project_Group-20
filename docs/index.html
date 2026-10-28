@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrashMetrics Australia — Road Crash Hospitalisation Analysis (2011–2021)</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans (Neo-Grotesque UI & Tabular Numerals) + Instrument Serif (Editorial Accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  
+  <!-- D3.js v7 CDN -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+  <!-- Preloader Screen (designsample3.mp4 WoodNest Framed Counter Choreography) -->
+  <div id="preloader" role="status" aria-live="polite">
+    <div class="preloader-frame">
+      <div class="preloader-top-progress" id="preloader-bar"></div>
+      <div class="preloader-bottom-row">
+        <div class="preloader-counter" id="preloader-counter">0%</div>
+        <div class="preloader-label">Loading Verified AIHW National Morbidity Records (2011–2021)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Floating Tooltip (dashboarddesign.webp & bikerental.webp style) -->
+  <div id="global-tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <!-- Outer Page Shell -->
+  <div class="page-shell">
+
+    <!-- ==========================================================================
+         HERO SHOWCASE (designsample3.mp4 WoodNest + webdesign.webp + enviromentaldesign.webp)
+         ========================================================================== -->
+    <header class="hero-showcase" id="top">
+      <div class="hero-backdrop-container">
+        <img src="assets/hero-highway.jpg" alt="Atmospheric Australian mountain highway at dusk" class="hero-bg-image" width="1600" height="900">
+        <div class="hero-vignette"></div>
+
+        <!-- Framed Inner Viewport (designsample3.mp4 signature rounded border) -->
+        <div class="hero-inner-frame">
+          
+          <!-- Integrated Top Navigation inside Hero Frame -->
+          <nav class="hero-nav" aria-label="Primary Navigation">
+            <a href="#top" class="brand-mark">
+              <span class="brand-dot-cluster" aria-hidden="true">
+                <span class="dot-amber"></span>
+                <span class="dot-amber-sm"></span>
+              </span>
+              <span class="brand-name">CrashMetrics</span>
+              <span class="brand-tag">AIHW 2011–21</span>
+            </a>
+
+            <ul class="hero-nav-links">
+              <li><a href="#storyline1" class="nav-link active">National Trends</a></li>
+              <li><a href="#storyline2" class="nav-link">Road Users &amp; Age</a></li>
+              <li><a href="#storyline3" class="nav-link">State Patterns</a></li>
+              <li><a href="#storyline4" class="nav-link">First Nations</a></li>
+            </ul>
+
+            <a href="#storyline1" class="hero-cta-pill">Explore Data</a>
+          </nav>
+
+          <!-- Main Asymmetric Split Content inside Hero Frame -->
+          <div class="hero-split-body">
+            
+            <!-- Left Column: Giant 3-Line Display Typography + Bottom Info & Star Stat -->
+            <div class="hero-left-col">
+              <h1 class="hero-display-title">
+                Australia’s<br>
+                <span class="muted-word">Road Trauma</span><br>
+                In Focus
+              </h1>
+
+              <div class="hero-bottom-meta">
+                <p class="hero-lead-copy">
+                  Discover a decade of verified hospital admission records across Australian roads. Examine injury severity, acute bed utilisation, demographic risk, and regional patterns.
+                </p>
+
+                <div class="hero-rating-stat">
+                  <div class="rating-top-line">
+                    <span class="star-glyph" aria-hidden="true">★</span>
+                    <span class="rating-big-num" id="kpi-total-hosp">410,884</span>
+                  </div>
+                  <div class="rating-sub-line">admissions recorded across 2011–2021</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Floating Smoked-Glass Surveillance Widget (designsample3.mp4 card) -->
+            <aside class="hero-glass-widget" aria-label="National Surveillance Summary Widget">
+              <div class="widget-header">
+                <div>
+                  <h2 class="widget-title">National Surveillance<br>Morbidity Cohort</h2>
+                </div>
+                <a href="#storyline1" class="widget-icon-btn" title="Jump to National Trends" aria-label="Jump to National Trends">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+
+              <!-- 2-Column Pill Selectors (Feb 11 / Mar 25 style) -->
+              <div class="widget-pill-row">
+                <div class="widget-mini-pill">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>2011 – 2021</span>
+                  <span class="chevron">▾</span>
+                </div>
+                <div class="widget-mini-pill">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>8 Jurisdictions</span>
+                  <span class="chevron">▾</span>
+                </div>
+              </div>
+
+              <!-- 2-Column Divided Metric Box (Check-in / Check-out style) -->
+              <div class="widget-split-box">
+                <div class="split-cell">
+                  <span class="split-label">Total Bed Days</span>
+                  <span class="split-val" id="kpi-total-beds">2,007,387</span>
+                </div>
+                <div class="split-divider"></div>
+                <div class="split-cell">
+                  <span class="split-label">Pre-COVID Peak</span>
+                  <span class="split-val"><span id="kpi-peak-year">2019</span> (39,866)</span>
+                </div>
+              </div>
+
+              <!-- Bottom Metric & Reserve-Style White CTA Button -->
+              <div class="widget-price-row">
+                <div class="widget-big-stat">
+                  <span class="stat-main" id="kpi-avg-stay">4.89</span>
+                  <span class="stat-unit">/ days avg stay</span>
+                </div>
+                <span class="widget-tag">Excl. 30-day deaths</span>
+              </div>
+
+              <a href="#storyline1" class="widget-primary-btn">Inspect Longitudinal Data</a>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Architectural 3-Column Bento Strip (webdesign.webp & enviromentaldesign.webp bottom bar) -->
+      <div class="hero-bento-strip">
+        <div class="strip-card strip-light">
+          <div class="strip-card-content">
+            <span class="strip-eyebrow">01 · National Trajectory</span>
+            <h3 class="strip-heading">Start exploring Australia’s 11-year road hospitalisation curve</h3>
+            <a href="#storyline1" class="strip-underlined-link">View Longitudinal Analysis</a>
+          </div>
+          <div class="strip-visual-accent" aria-hidden="true">
+            <svg width="110" height="56" viewBox="0 0 110 56" fill="none">
+              <path d="M4 46 C22 45, 34 38, 48 26 C62 14, 74 10, 86 12 C94 14, 100 22, 106 16" stroke="#181B20" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="86" cy="12" r="4" fill="#F59E0B" stroke="#fff" stroke-width="1.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="strip-card strip-white">
+          <div class="strip-icon-row">
+            <div class="strip-circle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+            </div>
+            <p class="strip-mid-text">
+              Compare raw admission counts against inpatient bed-day burden across 12 road-user types.
+            </p>
+          </div>
+          <div class="strip-segmented-lines" aria-hidden="true">
+            <span class="seg active"></span>
+            <span class="seg active"></span>
+            <span class="seg"></span>
+            <span class="seg"></span>
+          </div>
+        </div>
+
+        <div class="strip-card strip-dark">
+          <div class="strip-avatar-cluster" aria-hidden="true">
+            <span class="mode-bubble b1">🚗</span>
+            <span class="mode-bubble b2">🏍️</span>
+            <span class="mode-bubble b3">🚲</span>
+          </div>
+          <div class="strip-dark-stat">
+            <div class="dark-stat-num">+17.1%</div>
+            <p class="dark-stat-desc">Growth in annual admissions from 2011 baseline to the 2019 peak</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+         MAIN ANALYTICAL WORKSPACE (dashboarddesign.webp & bikerental.webp Bento System)
+         ========================================================================== -->
+    <main class="bento-workspace">
+
+      <!-- ========================================================================
+           STORYLINE 1: National Hospitalisation Trends (2011–2021)
+           ======================================================================== -->
+      <section id="storyline1" class="storyline-block" aria-labelledby="s1-title">
+        <div class="bento-shell">
+          
+          <!-- Section Top Bar -->
+          <div class="bento-header">
+            <div class="bento-title-group">
+              <div class="eyebrow-row">
+                <span class="section-num-pill">01</span>
+                <span class="section-eyebrow">National Hospitalisation Trends · 2011–2021</span>
+              </div>
+              <h2 id="s1-title" class="bento-title">
+                How did hospitalisations from road crashes in Australia change<em> between 2011 and 2021?</em>
+              </h2>
+            </div>
+
+            <div class="bento-controls">
+              <div class="clean-pill-group" role="group" aria-label="Storyline 1 Measure Selector">
+                <button class="clean-pill-btn active" data-measure="Hospitalisations" id="s1-btn-hosp">
+                  Hospitalisations
+                </button>
+                <button class="clean-pill-btn" data-measure="BedDays" id="s1-btn-beds">
+                  Hospital Bed Days
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Overview KPI Cards (Exact dashboarddesign.webp "Overview" inset cards pattern) -->
+          <div class="overview-inset-tray">
+            <div class="inset-stat-card active-inset" id="s1-card-hosp" role="button" tabindex="0" aria-label="Select Hospitalisations Measure">
+              <div class="inset-card-top">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span>Admitted Patients (2011–2021)</span>
+              </div>
+              <div class="inset-card-main">
+                <span class="inset-big-num">410,884</span>
+                <div class="inset-badge-stack">
+                  <span class="semantic-pill pill-coral">↑ 17.1%</span>
+                  <span class="inset-sublabel">to 2019 peak (39,866)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-stat-card" id="s1-card-beds" role="button" tabindex="0" aria-label="Select Hospital Bed Days Measure">
+              <div class="inset-card-top">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Occupied Inpatient Bed Days</span>
+              </div>
+              <div class="inset-card-main">
+                <span class="inset-big-num">2,007,387</span>
+                <div class="inset-badge-stack">
+                  <span class="semantic-pill pill-green">4.89 days</span>
+                  <span class="inset-sublabel">average length of stay</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-narrative-box">
+              <div class="narrative-headline">3 Comparability Breaks Annotated</div>
+              <p class="narrative-copy">
+                Hover over the timeline markers to inspect the <strong>2012 Victoria catchment change</strong>, <strong>2017 NSW coding break</strong>, and <strong>2020 COVID-19 lockdown drop (-4.8%)</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Chart Viewport -->
+          <div class="chart-stage" id="chart-storyline1" role="region" aria-label="National Hospitalisation Line Chart"></div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================
+           STORYLINE 2: Road-User and Age-Group Patterns
+           ======================================================================== -->
+      <section id="storyline2" class="storyline-block" aria-labelledby="s2-title">
+        <div class="bento-shell">
+          
+          <div class="bento-header">
+            <div class="bento-title-group">
+              <div class="eyebrow-row">
+                <span class="section-num-pill">02</span>
+                <span class="section-eyebrow">Demographic &amp; Mode Vulnerability Breakdown</span>
+              </div>
+              <h2 id="s2-title" class="bento-title">
+                Which road-user categories and age groups accounted for more hospitalisations, <em>and how did bed use compare?</em>
+              </h2>
+            </div>
+
+            <div class="bento-controls">
+              <!-- Tactile Year Scrubber Pill -->
+              <div class="scrubber-pill">
+                <span class="scrubber-label">Year</span>
+                <span class="scrubber-year" id="s2-year-badge">2021</span>
+                <input type="range" min="2011" max="2021" value="2021" step="1" class="tactile-range" id="s2-year-slider" aria-label="Select Year for Storyline 2">
+                <button class="scrubber-play-btn" id="s2-play-btn" title="Play timeline animation" aria-label="Play timeline animation">▶</button>
+              </div>
+
+              <!-- Measure Toggle -->
+              <div class="clean-pill-group" role="group" aria-label="Storyline 2 Measure Selector">
+                <button class="clean-pill-btn active" data-measure="Hospitalisations" id="s2-btn-hosp">Admissions</button>
+                <button class="clean-pill-btn" data-measure="BedDays" id="s2-btn-beds">Bed Days</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dual Asymmetric Bento Sub-Grid -->
+          <div class="dual-bento-grid">
+            
+            <!-- Left: Sorted Horizontal Bar Chart for Road Users -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">Road-User Categories</h3>
+                  <p class="sub-card-subtitle">Sorted descending by volume · Accommodates full mode labels</p>
+                </div>
+                <span class="chip-tag">Sorted by Rank</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline2-users" role="region" aria-label="Road Users Horizontal Bar Chart"></div>
+            </div>
+
+            <!-- Right: Ordered Vertical Bar Chart for Age Groups (dashboarddesign.webp Product view style) -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">Age Group Progression</h3>
+                  <p class="sub-card-subtitle">Locked in natural chronological order from 0–7 to 75+</p>
+                </div>
+                <span class="chip-tag">Chronological Sequence</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline2-age" role="region" aria-label="Age Group Vertical Bar Chart"></div>
+            </div>
+
+          </div>
+
+          <!-- Analytical Footer Strip -->
+          <div class="insight-strip">
+            <div class="insight-pill-badge">Analytical Finding</div>
+            <p class="insight-strip-text">
+              <strong>Car occupants</strong> (drivers and passengers) represent nearly half of all admissions, followed by <strong>motorcyclists</strong> and <strong>pedal cyclists</strong>. Switching to <strong>Bed Days</strong> reveals disproportionate inpatient stays among older Australians (<strong>65–74</strong> and <strong>75+</strong> average 6.5+ bed days per crash) and motorcyclists due to high-energy orthopaedic trauma.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================
+           STORYLINE 3: State and Territory Patterns (bikerental.webp Dual-Pane Architecture)
+           ======================================================================== -->
+      <section id="storyline3" class="storyline-block" aria-labelledby="s3-title">
+        <div class="bento-shell bento-split-shell">
+          
+          <!-- Left Dark Atmospheric Panel (bikerental.webp Left Map/Matrix Pane) -->
+          <div class="split-dark-pane">
+            <div class="dark-pane-header">
+              <div>
+                <div class="eyebrow-row">
+                  <span class="section-num-pill dark-num-pill">03</span>
+                  <span class="section-eyebrow dark-eyebrow">Geographic &amp; Temporal Matrix</span>
+                </div>
+                <h2 id="s3-title" class="dark-pane-title">State &amp; Territory Variations</h2>
+                <p class="dark-pane-subtitle">Click any state row in the matrix to inspect its 11-year trajectory</p>
+              </div>
+
+              <div class="clean-pill-group dark-pill-group" role="group" aria-label="Storyline 3 Measure Selector">
+                <button class="clean-pill-btn active" data-measure="Hospitalisations" id="s3-btn-hosp">Admissions</button>
+                <button class="clean-pill-btn" data-measure="BedDays" id="s3-btn-beds">Bed Days</button>
+              </div>
+            </div>
+
+            <!-- Heatmap SVG Container -->
+            <div class="heatmap-stage" id="chart-storyline3-heatmap" role="region" aria-label="State and Territory Heatmap Matrix"></div>
+
+            <!-- Bottom Legend & Floating Station-Style Callout Card (bikerental.webp #38 Cabo Jubi Station style) -->
+            <div class="dark-pane-footer">
+              <div class="heatmap-scale-pill" id="s3-heatmap-legend">
+                <span class="scale-label" id="s3-legend-min">0</span>
+                <canvas class="scale-canvas" id="s3-legend-canvas" width="160" height="8"></canvas>
+                <span class="scale-label" id="s3-legend-max">12,000</span>
+              </div>
+
+              <div class="population-warning-pill">
+                <span class="warn-dot"></span>
+                <span><strong>Population Caveat:</strong> Raw totals reflect resident population scale (e.g. NSW ~8.2M vs NT ~250K), not individual per-capita driving risk.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Warm Alabaster Detail Panel (bikerental.webp Right "Urban City Bike / Latest Journeys" Pane) -->
+          <div class="split-light-pane">
+            <div class="light-pane-top">
+              <div>
+                <span class="light-pane-eyebrow">Selected Jurisdiction Focus</span>
+                <div class="state-header-row">
+                  <h3 class="state-focus-heading" id="s3-focus-state-badge">NSW Trajectory</h3>
+                  <span class="state-active-chip">● Active Selection</span>
+                </div>
+              </div>
+
+              <select class="clean-select-pill" id="s3-state-dropdown" aria-label="Select State or Territory">
+                <option value="NSW">New South Wales (NSW)</option>
+                <option value="Vic">Victoria (Vic)</option>
+                <option value="Qld">Queensland (Qld)</option>
+                <option value="WA">Western Australia (WA)</option>
+                <option value="SA">South Australia (SA)</option>
+                <option value="Tas">Tasmania (Tas)</option>
+                <option value="ACT">Australian Capital Territory (ACT)</option>
+                <option value="NT">Northern Territory (NT)</option>
+              </select>
+            </div>
+
+            <!-- White Card Holding Coordinated State Line Chart (bikerental.webp "Last ride" card) -->
+            <div class="white-trajectory-card">
+              <div class="trajectory-card-meta" id="s3-state-meta-summary">10-Year Cumulative: Loading...</div>
+              <div id="chart-storyline3-stateline" role="region" aria-label="Selected State Longitudinal Trajectory"></div>
+            </div>
+
+            <!-- Dark Charcoal Journey Milestone Cards (bikerental.webp "Latest journeys" cards) -->
+            <div class="journey-cards-section">
+              <div class="journey-section-header">
+                <span class="journey-section-title">Key Jurisdiction Milestones</span>
+                <span class="journey-section-tag">2011 → 2021 Progression</span>
+              </div>
+
+              <div class="dark-journey-card">
+                <div class="journey-left-col">
+                  <span class="journey-year-label">2011 → 2019</span>
+                  <span class="journey-sub-tag">Pre-COVID Span</span>
+                </div>
+                <div class="journey-timeline-col">
+                  <div class="journey-nodes-top">
+                    <span id="s3-j1-start">2011 Base</span>
+                    <span class="journey-delta-badge" id="s3-j1-delta">+0.0%</span>
+                    <span id="s3-j1-end">2019 Peak</span>
+                  </div>
+                  <div class="journey-track-line">
+                    <span class="j-node"></span>
+                    <span class="j-bar"></span>
+                    <span class="j-node"></span>
+                  </div>
+                  <div class="journey-nodes-bottom">
+                    <span>Baseline Volume</span>
+                    <span>Decade Trajectory</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dark-journey-card">
+                <div class="journey-left-col">
+                  <span class="journey-year-label">2020 → 2021</span>
+                  <span class="journey-sub-tag">Pandemic Shift</span>
+                </div>
+                <div class="journey-timeline-col">
+                  <div class="journey-nodes-top">
+                    <span id="s3-j2-start">2020 Dip</span>
+                    <span class="journey-delta-badge" id="s3-j2-delta">Rebound</span>
+                    <span id="s3-j2-end">2021 Latest</span>
+                  </div>
+                  <div class="journey-track-line">
+                    <span class="j-node"></span>
+                    <span class="j-bar"></span>
+                    <span class="j-node"></span>
+                  </div>
+                  <div class="journey-nodes-bottom">
+                    <span>Lockdown Impact</span>
+                    <span>Post-Lockdown Recovery</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================
+           STORYLINE 4: First Nations Hospitalisation Patterns
+           ======================================================================== -->
+      <section id="storyline4" class="storyline-block" aria-labelledby="s4-title">
+        <div class="bento-shell">
+          
+          <div class="bento-header">
+            <div class="bento-title-group">
+              <div class="eyebrow-row">
+                <span class="section-num-pill">04</span>
+                <span class="section-eyebrow">First Nations Road Safety &amp; Health Equity</span>
+              </div>
+              <h2 id="s4-title" class="bento-title">
+                What were the hospitalisation patterns among Aboriginal and Torres Strait Islander people <em>across years, modes, and ages?</em>
+              </h2>
+            </div>
+
+            <div class="bento-controls">
+              <div class="scrubber-pill">
+                <span class="scrubber-label">Breakdown Year</span>
+                <span class="scrubber-year" id="s4-year-badge">2021</span>
+                <input type="range" min="2011" max="2021" value="2021" step="1" class="tactile-range" id="s4-year-slider" aria-label="Select Year for Storyline 4">
+                <button class="scrubber-play-btn" id="s4-play-btn" title="Play timeline animation" aria-label="Play timeline animation">▶</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Architectural Row: Annual Trend Line + Stark Charcoal Metric Callout (enviromentaldesign.webp style) -->
+          <div class="fn-top-bento-row">
+            <div class="sub-bento-card fn-trend-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">Annual First Nations Hospitalisations (2011–2021)</h3>
+                  <p class="sub-card-subtitle">Click any year node on the curve to filter the mode and age charts below</p>
+                </div>
+                <span class="chip-tag">National NHMD Cohort</span>
+              </div>
+              <div id="chart-storyline4-trend" role="region" aria-label="First Nations Annual Trend Line Chart"></div>
+            </div>
+
+            <div class="fn-contrast-stat-box">
+              <div class="contrast-top">
+                <span class="contrast-eyebrow">11-Year Trajectory</span>
+                <div class="contrast-huge-pct">+76.4%</div>
+                <p class="contrast-desc">
+                  Recorded hospital admissions rose from <strong>1,167</strong> in 2011 to <strong>2,059</strong> in 2021.
+                </p>
+              </div>
+
+              <div class="contrast-divider"></div>
+
+              <div class="contrast-bottom">
+                <span class="np-pill-indicator">Hatched Slot = 'n.p.' Suppressed</span>
+                <p class="contrast-small-note">
+                  To protect patient confidentiality under AIHW protocols, small counts (&lt; 5 cases) are marked <strong>n.p.</strong> and rendered as diagonal hatched slots rather than zero.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom 2-Column Linked Breakdown Row -->
+          <div class="dual-bento-grid">
+            
+            <!-- Left: First Nations Road Users -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">First Nations Road-User Distribution</h3>
+                  <p class="sub-card-subtitle">Consolidated vehicle occupant groups · Hatched bars indicate suppressed 'n.p.' cells</p>
+                </div>
+                <span class="chip-tag chip-coral">Includes 'n.p.' Slots</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline4-users" role="region" aria-label="First Nations Road Users Bar Chart"></div>
+            </div>
+
+            <!-- Right: First Nations Age Groups -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">First Nations Age Group Distribution</h3>
+                  <p class="sub-card-subtitle">Older cohorts consolidated into '65+' reflecting Indigenous demographic structure</p>
+                </div>
+                <span class="chip-tag">65+ Consolidated</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline4-age" role="region" aria-label="First Nations Age Group Bar Chart"></div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Minimalist Editorial Footer -->
+    <footer class="editorial-footer">
+      <div class="footer-brand-col">
+        <span class="footer-logo">CrashMetrics Australia</span>
+        <p class="footer-meta">COS30045 Data Visualisation · Interactive Longitudinal Study (2011–2021)</p>
+      </div>
+      <div class="footer-source-col">
+        <p>Source: Australian Institute of Health and Welfare (AIHW) National Hospital Morbidity Database (NHMD).</p>
+      </div>
+      <div class="footer-nav-col">
+        <a href="#top">Top ↑</a>
+        <a href="#storyline1">01 National</a>
+        <a href="#storyline2">02 Users &amp; Age</a>
+        <a href="#storyline3">03 States</a>
+        <a href="#storyline4">04 First Nations</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Shared SVG Defs for Soft Gradients & Diagonal Hatching -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Soft Warm Amber Gradient for Storyline 1 & State Line -->
+      <linearGradient id="area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.28"/>
+        <stop offset="85%" stop-color="#F59E0B" stop-opacity="0.03"/>
+        <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Emerald Gradient for Active Vertical Bars (dashboarddesign.webp style) -->
+      <linearGradient id="emerald-bar-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#34D399"/>
+        <stop offset="100%" stop-color="#10B981" stop-opacity="0.75"/>
+      </linearGradient>
+
+      <!-- Diagonal Hatch Pattern for Suppressed n.p. Records -->
+      <pattern id="diagonal-hatch-pattern" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <rect width="8" height="8" fill="#FFF1F0"/>
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#F43F5E" stroke-width="2" stroke-opacity="0.65" />
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- JavaScript Modules -->
+  <script src="js/storyline1_national.js"></script>
+  <script src="js/storyline2_groups.js"></script>
+  <script src="js/storyline3_states.js"></script>
+  <script src="js/storyline4_firstnations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
