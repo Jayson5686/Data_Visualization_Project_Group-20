@@ -110,6 +110,10 @@ function initStoryline3(stateData) {
       : value;
   }
 
+  function localizedStateName(code) {
+    return localized(getStateFullName(code));
+  }
+
   function renderHeatmapTable() {
     const tableContainer = document.getElementById('s3-heatmap-table');
     if (!tableContainer) return;
@@ -206,18 +210,18 @@ function initStoryline3(stateData) {
       .on('mouseenter', function(event, d) {
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">Jurisdiction Cell</span>
+            <span class="tooltip-tag">${localized('Jurisdiction Cell')}</span>
             <span class="tooltip-badge">${d.Year}</span>
           </div>
-          <div class="tooltip-title">${getStateFullName(d.State)} (${d.State})</div>
+          <div class="tooltip-title">${localizedStateName(d.State)} (${d.State})</div>
           <div class="tooltip-metric-row">
             <span class="tooltip-value">${window.formatNumber(d[activeMeasure])}</span>
-            <span class="tooltip-subvalue">${activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days'}</span>
+            <span class="tooltip-subvalue">${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</span>
           </div>
           <div class="tooltip-extra">
-            Admissions: <strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
-            Bed Days: <strong>${window.formatNumber(d.BedDays)}</strong><br>
-            Avg Stay: <strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} days</strong>
+            ${localized('Admissions:')}<strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
+            ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>
+            ${localized('Avg Stay:')}<strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} ${localized('days')}</strong>
           </div>
         `);
       })
@@ -269,7 +273,7 @@ function initStoryline3(stateData) {
     if (dropdown) dropdown.value = activeState;
 
     const badge = document.getElementById('s3-focus-state-badge');
-    if (badge) badge.textContent = `${activeState} Trajectory`;
+    if (badge)     badge.textContent = localized(`${activeState} Trajectory`);
 
     gHm.selectAll('.heatmap-cell')
       .classed('active', d => d.State === activeState)
@@ -294,7 +298,7 @@ function initStoryline3(stateData) {
     const totalStateBeds = d3.sum(filtered, d => d.BedDays);
     const metaSummary = document.getElementById('s3-state-meta-summary');
     if (metaSummary) {
-      metaSummary.innerHTML = `11-Year Total: <strong>${window.formatNumber(totalStateHosp)}</strong> Admissions · <strong>${window.formatNumber(totalStateBeds)}</strong> Bed Days`;
+      metaSummary.innerHTML = `${localized('11-Year Total:')} <strong>${window.formatNumber(totalStateHosp)}</strong> ${localized('Admissions')} · <strong>${window.formatNumber(totalStateBeds)}</strong> ${localized('Bed Days')}`;
     }
 
     // Update Dark Journey Milestone Cards (bikerental.webp "Latest journeys" cards)
@@ -375,17 +379,17 @@ function initStoryline3(stateData) {
       .on('mouseenter', function(event, d) {
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">${d.State} Trajectory</span>
+            <span class="tooltip-tag">${localized(`${d.State} Trajectory`)}</span>
             <span class="tooltip-badge">${d.Year}</span>
           </div>
-          <div class="tooltip-title">${getStateFullName(d.State)}</div>
+          <div class="tooltip-title">${localizedStateName(d.State)}</div>
           <div class="tooltip-metric-row">
             <span class="tooltip-value">${window.formatNumber(d[activeMeasure])}</span>
-            <span class="tooltip-subvalue">${activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days'}</span>
+            <span class="tooltip-subvalue">${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</span>
           </div>
           <div class="tooltip-extra">
-            Bed Days: <strong>${window.formatNumber(d.BedDays)}</strong><br>
-            Avg Stay: <strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} days</strong>
+            ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>
+            ${localized('Avg Stay:')}<strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} ${localized('days')}</strong>
           </div>
         `);
       })
@@ -476,7 +480,11 @@ function initStoryline3(stateData) {
     attributes: true,
     attributeFilter: ['data-theme']
   });
-  window.addEventListener('crashmetrics:languagechange', updateHeatmap);
+  window.addEventListener('crashmetrics:languagechange', () => {
+    updateHeatmap();
+    selectState(activeState);
+    window.hideTooltip();
+  });
   updateHeatmap();
   selectState(activeState);
 }

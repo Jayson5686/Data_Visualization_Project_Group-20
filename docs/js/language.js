@@ -13,6 +13,16 @@ const languageCatalog = {
   "Footer Navigation": ["页脚导航", "Navigasi Pengaki", "フッターナビゲーション"],
   "Skip to main content": ["跳转到主要内容", "Langkau ke kandungan utama", "メインコンテンツへスキップ"],
   "Story guide": ["故事指南", "Panduan cerita", "ストーリーガイド"],
+  "Select a state or territory to inspect its 11-year trajectory": [
+    "选择一个州或领地，查看其 11 年变化趋势",
+    "Pilih negeri atau wilayah untuk melihat trend 11 tahunnya",
+    "州・準州を選択して11年間の推移を確認します"
+  ],
+  "Use arrow keys to move through the grid; press Enter or Space to select a state and update its trend.": [
+    "使用方向键浏览网格；按 Enter 或空格键选择州或领地并更新趋势图。",
+    "Gunakan kekunci anak panah untuk bergerak dalam grid; tekan Enter atau Space untuk memilih negeri atau wilayah dan mengemas kini trendnya.",
+    "矢印キーでグリッドを移動し、EnterまたはSpaceで州・準州を選択して推移を更新します。"
+  ],
   "Follow the national trend from 2011 to 2021, then compare admissions with bed days. Reporting changes and the 2020 pandemic period provide context for interpreting changes over time.": [
     "查看 2011 至 2021 年的全国趋势，并比较住院次数与住院床日。报告口径变化和 2020 年疫情时期有助于理解趋势变化。",
     "Ikuti trend nasional dari 2011 hingga 2021, kemudian bandingkan kemasukan dengan hari katil. Perubahan pelaporan dan tempoh pandemik 2020 memberi konteks untuk mentafsir perubahan dari semasa ke semasa.",
@@ -24,9 +34,9 @@ const languageCatalog = {
     "年を選び、道路利用者の区分と年齢層を比較します。入院件数と病床日数を切り替えてください。データ表では、色やホバー操作に頼らず正確な値を確認できます。"
   ],
   "Read rows as states or territories and columns as years. Select a heatmap cell to update the trend chart. These are raw totals, not per-person rates, so differences in population size matter.": [
-    "行は州・準州、列は年を表します。ヒートマップのセルを選択すると推移グラフが更新されます。数値は人口あたりの率ではなく合計値のため、人口規模の違いに注意してください。",
+    "每一行代表一个州或领地，每一列代表一年。选择热图单元格可更新趋势图。这些是总数而非人均比率，因此比较时应注意人口规模差异。",
     "Baris mewakili negeri atau wilayah dan lajur mewakili tahun. Pilih sel peta haba untuk mengemas kini carta trend. Nilai ini ialah jumlah mentah, bukannya kadar per kapita, jadi perbezaan saiz penduduk perlu diambil kira.",
-    "每一行代表一个州或领地，每一列代表一年。选择热图单元格以更新趋势图。这些是总数而非人均比率，因此人口规模差异会影响比较。"
+    "行は州・準州、列は年を表します。ヒートマップのセルを選択すると推移グラフが更新されます。数値は人口あたりの率ではなく合計値のため、人口規模の違いに注意してください。"
   ],
   "Choose a year to compare road-user and age-group breakdowns. A hatched n.p. cell means a small count is suppressed for privacy, not that the value is zero. The 65+ age group is consolidated in this dataset; these figures describe recorded admissions and do not explain their causes.": [
     "选择年份以比较道路使用者和年龄组的细分数据。带斜线的 n.p. 单元格表示因隐私保护而隐藏了较小计数，并不代表数值为零。本数据集将 65 岁及以上合并为一组；这些数字记录住院情况，但不能说明其原因。",
@@ -210,6 +220,52 @@ const languageCatalog = {
   "Source: Australian Institute of Health and Welfare (AIHW) National Hospital Morbidity Database (NHMD).": ["数据来源：澳大利亚健康与福利研究所 (AIHW) 全国医院疾病数据库 (NHMD)。", "Sumber: Pangkalan Data Morbiditi Hospital Nasional (NHMD), Institut Kesihatan dan Kebajikan Australia (AIHW).", "出典：オーストラリア保健福祉研究所（AIHW）全国病院疾病データベース（NHMD）。"],
   "How to Use CrashMetrics": ["CrashMetrics 使用指南", "Cara Menggunakan CrashMetrics", "CrashMetricsの使い方"],
   "Close": ["关闭", "Tutup", "閉じる"],
+  "1. Choose a story": ["1. 选择一个主题", "1. Pilih bahagian cerita", "1. 分析テーマを選ぶ"],
+  "2. Change the year": ["2. 更改年份", "2. Tukar tahun", "2. 年を変更する"],
+  "3. Explore chart details": ["3. 查看图表详情", "3. Terokai butiran carta", "3. グラフの詳細を見る"],
+  "4. Compare places and measures": ["4. 比较地区和指标", "4. Bandingkan tempat dan ukuran", "4. 地域と指標を比較する"],
+  "5. View or download the data": ["5. 查看或下载数据", "5. Lihat atau muat turun data", "5. データを表示・ダウンロードする"],
+  "6. Remember privacy markers": ["6. 了解隐私标记", "6. Fahami penanda privasi", "6. プライバシー表示を確認する"],
+  "The dashboard is divided into four sections: national trends, road-user and age-group patterns, state and territory patterns, and First Nations patterns. Each section answers a different question about the 2011–2021 data.": [
+    "仪表板分为四个部分：全国趋势、道路使用者与年龄组、州和领地趋势，以及澳大利亚原住民数据。每个部分都探讨 2011 至 2021 年数据中的不同问题。",
+    "Papan pemuka ini mempunyai empat bahagian: trend nasional, corak pengguna jalan raya dan kumpulan umur, corak negeri dan wilayah, serta corak Orang Asal. Setiap bahagian menjawab soalan yang berbeza tentang data 2011–2021.",
+    "ダッシュボードは、全国的な傾向、道路利用者・年齢層、州・準州、先住民の4つのセクションに分かれています。それぞれ2011～2021年のデータに関する異なる問いを扱います。"
+  ],
+  "In the demographic and First Nations sections, use the year slider to move to a particular year. Use the play button to preview the years in sequence; select it again to pause.": [
+    "在人群和澳大利亚原住民部分，使用年份滑块选择特定年份。按播放按钮按顺序浏览各年，再按一次即可暂停。",
+    "Dalam bahagian demografi dan Orang Asal, gunakan peluncur tahun untuk memilih tahun tertentu. Tekan butang main untuk melihat tahun mengikut turutan; tekan sekali lagi untuk menjeda.",
+    "人口構成と先住民のセクションでは、年スライダーで特定の年を選びます。再生ボタンで年ごとの変化を確認し、もう一度押すと一時停止します。"
+  ],
+  "Hover over or focus a chart mark to see its details. On a focused mark, Left/Right Arrow moves through the chart; press Enter to select a mark when it offers an interaction.": [
+    "将鼠标悬停在图表标记上或使用键盘聚焦标记以查看详情。聚焦后，使用向左或向右箭头浏览图表；若标记可交互，按 Enter 进行选择。",
+    "Halakan penuding atau fokus pada tanda carta untuk melihat butirannya. Apabila tanda difokuskan, gunakan anak panah kiri/kanan untuk menelusuri carta; tekan Enter untuk memilih tanda yang boleh berinteraksi.",
+    "グラフのマークにカーソルを合わせるか、キーボードでフォーカスすると詳細を確認できます。左右の矢印キーで移動し、操作可能なマークではEnterを押して選択します。"
+  ],
+  "In State Patterns, choose a state or territory, or select a heatmap row to inspect its trajectory. Switch between Admissions and Bed Days to compare the measures.": [
+    "在州和领地部分，选择一个州或领地，或选择热图中的一行查看其趋势。切换住院次数和住院床日以比较指标。",
+    "Dalam corak negeri dan wilayah, pilih negeri atau wilayah, atau pilih baris peta haba untuk melihat trendnya. Tukar antara kemasukan hospital dan hari katil untuk membandingkan ukuran.",
+    "州・準州のセクションでは、州・準州またはヒートマップの行を選択して推移を確認します。入院件数と病床日数を切り替えて比較できます。"
+  ],
+  "Use View Data to open the tables for a section. Download CSV saves the complete data behind that section’s charts so you can open it in a spreadsheet.": [
+    "选择“查看数据”以打开该部分的数据表。选择“下载 CSV”可保存图表所用的完整数据，并在电子表格中查看。",
+    "Pilih Lihat Data untuk membuka jadual bagi sesuatu bahagian. Muat turun CSV menyimpan data lengkap di sebalik carta bahagian itu supaya anda boleh membukanya dalam hamparan.",
+    "「データを表示」で各セクションの表を開けます。「CSVをダウンロード」ではグラフの元データを保存し、表計算ソフトで確認できます。"
+  ],
+  "A hatched n.p. value means a small count was not published to protect confidentiality. It is not zero; the same marker is retained in the First Nations data table and CSV.": [
+    "带斜线的 n.p. 表示因保密原因未公布较小计数，并不代表零。澳大利亚原住民数据表和 CSV 中也保留此标记。",
+    "Nilai n.p. berjalur bermaksud bilangan kecil tidak diterbitkan demi kerahsiaan. Nilainya bukan sifar; penanda yang sama dikekalkan dalam jadual data dan CSV Orang Asal.",
+    "斜線付きのn.p.は、プライバシー保護のため少数値が公表されていないことを示し、ゼロではありません。先住民のデータ表とCSVにも同じ表示が使われます。"
+  ],
+  "Go to National Trends": ["前往全国趋势", "Pergi ke Trend Nasional", "全国的な傾向へ"],
+  "Go to Users & Age": ["前往道路使用者与年龄", "Pergi ke Pengguna Jalan Raya & Umur", "道路利用者・年齢層へ"],
+  "Go to First Nations charts": ["前往澳大利亚原住民图表", "Pergi ke Carta Orang Asal", "先住民のグラフへ"],
+  "Go to State Patterns": ["前往州和领地趋势", "Pergi ke Corak Negeri dan Wilayah", "州・準州の傾向へ"],
+  "Step 1 of 6": ["步骤 1 / 6", "Langkah 1 daripada 6", "ステップ 1 / 6"],
+  "Step 2 of 6": ["步骤 2 / 6", "Langkah 2 daripada 6", "ステップ 2 / 6"],
+  "Step 3 of 6": ["步骤 3 / 6", "Langkah 3 daripada 6", "ステップ 3 / 6"],
+  "Step 4 of 6": ["步骤 4 / 6", "Langkah 4 daripada 6", "ステップ 4 / 6"],
+  "Step 5 of 6": ["步骤 5 / 6", "Langkah 5 daripada 6", "ステップ 5 / 6"],
+  "Step 6 of 6": ["步骤 6 / 6", "Langkah 6 daripada 6", "ステップ 6 / 6"],
   "Use Left/Right Arrow to move through navigation links or chart data. Use Tab and Shift+Tab to move through all controls; use arrow keys to adjust a focused year slider.": [
     "使用向左/向右箭头浏览导航链接或图表数据。使用 Tab 和 Shift+Tab 浏览所有控件；聚焦年份滑块后可用箭头键调整。",
     "Gunakan anak panah kiri/kanan untuk menavigasi pautan atau data carta. Gunakan Tab dan Shift+Tab untuk semua kawalan; gunakan anak panah untuk melaras peluncur tahun.",
@@ -345,7 +401,10 @@ const languageCatalog = {
   ],
   "Return to dashboard": ["返回仪表板", "Kembali ke papan pemuka", "ダッシュボードに戻る"],
   "National Cohort": ["全国队列", "Kohort Nasional", "全国コホート"],
+  "Road Crash Admissions": ["道路事故住院人数", "Kemasukan Hospital Akibat Kemalangan Jalan Raya", "道路事故による入院数"],
   "Bed Days Occupied": ["占用床日", "Hari Katil Digunakan", "使用病床日数"],
+  "Bed Days Occupied:": ["占用床日： ", "Hari Katil Digunakan: ", "使用病床日数： "],
+  "Average Length of Stay:": ["平均住院时长： ", "Purata Tempoh Kemasukan: ", "平均入院日数： "],
   "Comparability Break": ["可比性变化", "Perubahan Kebolehbandingan", "比較上の注意点"],
   "Admissions:": ["入院人数： ", "Kemasukan: ", "入院数： "],
   "Bed Days:": ["床日： ", "Hari Katil: ", "病床日数： "],
@@ -366,6 +425,7 @@ const languageCatalog = {
   "Step ": ["步骤 ", "Langkah ", "ステップ "],
   " of ": [" / ", " daripada ", " / "],
   "11-Year Total: ": ["11 年总计：", "Jumlah 11 Tahun: ", "11年間の合計："],
+  "11-Year Total:": ["11 年总计：", "Jumlah 11 Tahun:", "11年間の合計："],
   "Annual First Nations admissions": ["原住民年度住院人数", "Kemasukan Tahunan Orang Asal", "先住民の年間入院数"],
   "First Nations Annual": ["原住民年度数据", "Data Tahunan Orang Asal", "先住民の年間データ"],
   "Hospital Admissions": ["住院人数", "Kemasukan hospital", "入院数"],
@@ -558,6 +618,21 @@ const languageCatalog = {
 };
 
 const richLanguageCatalog = {
+  "Focus or point to chart marks for details. Press Esc to dismiss a tooltip.": [
+    "将鼠标悬停在图表标记上或聚焦标记以查看详情。按 <strong>Esc</strong> 关闭提示框。",
+    "Fokus atau halakan penuding pada tanda carta untuk melihat butiran. Tekan <strong>Esc</strong> untuk menutup petua alat.",
+    "グラフのマークにフォーカスするかカーソルを合わせると詳細が表示されます。<strong>Esc</strong>でツールチップを閉じます。"
+  ],
+  "Hatched n.p. values are not published to protect privacy; they are not zero.": [
+    "带斜线的 <strong>n.p.</strong> 值因隐私保护而未发布，并不表示为零。",
+    "Nilai <strong>n.p.</strong> berjalur tidak diterbitkan demi privasi; nilainya bukan sifar.",
+    "斜線の<strong>n.p.</strong>値はプライバシー保護のため非公開であり、ゼロではありません。"
+  ],
+  "Use Left/Right Arrow to move through navigation links or chart data. Use Tab and Shift+Tab to move through all controls; use arrow keys to adjust a focused year slider.": [
+    "使用 <strong>向左/向右箭头</strong>浏览导航链接或图表数据。使用 <strong>Tab</strong> 和 <strong>Shift+Tab</strong>浏览所有控件；聚焦年份滑块后，可使用箭头键调整。",
+    "Gunakan <strong>anak panah kiri/kanan</strong> untuk menavigasi pautan atau data carta. Gunakan <strong>Tab</strong> dan <strong>Shift+Tab</strong> untuk semua kawalan; gunakan anak panah untuk melaras peluncur tahun yang difokuskan.",
+    "ナビゲーションリンクやグラフデータの移動には<strong>左右の矢印キー</strong>を使います。すべての操作には<strong>Tab</strong>と<strong>Shift+Tab</strong>を使い、フォーカスした年スライダーは矢印キーで調整します。"
+  ],
   "How did hospitalisations from road crashes in Australia change between 2011 and 2021?": [
     "2011 至 2021 年间，澳大利亚道路事故住院人数如何变化？",
     "Bagaimanakah kemasukan hospital akibat kemalangan jalan raya di Australia berubah dari 2011 hingga 2021?",

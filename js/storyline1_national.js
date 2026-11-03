@@ -8,6 +8,13 @@ function initStoryline1(data) {
   if (!container) return;
   container.innerHTML = '';
 
+  function localized(value) {
+    const language = document.documentElement.dataset.language || 'en';
+    return window.translateCrashMetrics
+      ? window.translateCrashMetrics(value, language)
+      : value;
+  }
+
   const margin = { top: 38, right: 36, bottom: 44, left: 88 };
   const width = 1120 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
@@ -121,9 +128,9 @@ function initStoryline1(data) {
         .tickFormat('')
     );
 
-    yAxisTitle.text(measure === 'Hospitalisations' 
+    yAxisTitle.text(localized(measure === 'Hospitalisations'
       ? 'Admitted Patients (Excl. 30-Day Deaths)' 
-      : 'Total Hospital Bed Days Occupied');
+      : 'Total Hospital Bed Days Occupied'));
 
     linePath.datum(data).transition(t).attr('d', lineGenerator);
     areaPath.datum(data).transition(t).attr('d', areaGenerator);
@@ -149,22 +156,22 @@ function initStoryline1(data) {
         const baseline = data[0][currentMeasure];
         const diffFromBaseline = ((d[currentMeasure] - baseline) / baseline) * 100;
         const baselinePill = diffFromBaseline >= 0
-          ? `<span class="delta-pill up">+${diffFromBaseline.toFixed(1)}% vs 2011</span>`
-          : `<span class="delta-pill stable">${diffFromBaseline.toFixed(1)}% vs 2011</span>`;
+          ? `<span class="delta-pill up">+${diffFromBaseline.toFixed(1)}% ${localized('vs 2011')}</span>`
+          : `<span class="delta-pill stable">${diffFromBaseline.toFixed(1)}% ${localized('vs 2011')}</span>`;
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">National Cohort</span>
+            <span class="tooltip-tag">${localized('National Cohort')}</span>
             <span class="tooltip-badge">${d.Year}</span>
           </div>
-          <div class="tooltip-title">${currentMeasure === 'Hospitalisations' ? 'Road Crash Admissions' : 'Hospital Bed Days'}</div>
+          <div class="tooltip-title">${localized(currentMeasure === 'Hospitalisations' ? 'Road Crash Admissions' : 'Hospital Bed Days')}</div>
           <div class="tooltip-metric-row">
             <span class="tooltip-value">${window.formatNumber(d[currentMeasure])}</span>
             ${baselinePill}
           </div>
           <div class="tooltip-extra">
-            Admissions: <strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
-            Bed Days: <strong>${window.formatNumber(d.BedDays)}</strong><br>
-            Average Length of Stay: <strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} days / patient</strong>
+            ${localized('Admissions:')}<strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
+            ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>
+            ${localized('Average Length of Stay:')}<strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} ${localized('days / patient')}</strong>
           </div>
         `);
       })
@@ -226,7 +233,7 @@ function initStoryline1(data) {
       gAnno.on('mouseenter', (event) => {
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">Comparability Break</span>
+            <span class="tooltip-tag">${localized('Comparability Break')}</span>
             <span class="tooltip-badge">${anno.year}</span>
           </div>
           <div class="tooltip-title">${anno.label}</div>
@@ -257,24 +264,24 @@ function initStoryline1(data) {
       const baseline = data[0][currentMeasure];
       const diffFromBaseline = ((d[currentMeasure] - baseline) / baseline) * 100;
       const baselinePill = diffFromBaseline >= 0 
-        ? `<span class="delta-pill up">+${diffFromBaseline.toFixed(1)}% vs 2011</span>`
-        : `<span class="delta-pill stable">${diffFromBaseline.toFixed(1)}% vs 2011</span>`;
+        ? `<span class="delta-pill up">+${diffFromBaseline.toFixed(1)}% ${localized('vs 2011')}</span>`
+        : `<span class="delta-pill stable">${diffFromBaseline.toFixed(1)}% ${localized('vs 2011')}</span>`;
 
       const avgDays = (d.BedDays / d.Hospitalisations).toFixed(1);
 
       window.showTooltip(event, `
         <div class="tooltip-header">
-          <span class="tooltip-tag">National Cohort</span>
+          <span class="tooltip-tag">${localized('National Cohort')}</span>
           <span class="tooltip-badge">${d.Year}</span>
         </div>
-        <div class="tooltip-title">${currentMeasure === 'Hospitalisations' ? 'Road Crash Admissions' : 'Hospital Bed Days'}</div>
+        <div class="tooltip-title">${localized(currentMeasure === 'Hospitalisations' ? 'Road Crash Admissions' : 'Hospital Bed Days')}</div>
         <div class="tooltip-metric-row">
           <span class="tooltip-value">${window.formatNumber(d[currentMeasure])}</span>
           ${baselinePill}
         </div>
         <div class="tooltip-extra">
-          ${currentMeasure === 'Hospitalisations' ? `Bed Days Occupied: <strong>${window.formatNumber(d.BedDays)}</strong><br>` : ''}
-          Avg Length of Stay: <strong>${avgDays} days / patient</strong>
+          ${currentMeasure === 'Hospitalisations' ? `${localized('Bed Days Occupied:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>` : ''}
+          ${localized('Avg Length of Stay:')}<strong>${avgDays} ${localized('days / patient')}</strong>
         </div>
       `);
     })
@@ -311,5 +318,9 @@ function initStoryline1(data) {
   if (cardHosp) cardHosp.addEventListener('click', () => setMeasureS1('Hospitalisations'));
   if (cardBeds) cardBeds.addEventListener('click', () => setMeasureS1('BedDays'));
 
+  window.addEventListener('crashmetrics:languagechange', () => {
+    updateChart(currentMeasure);
+    window.hideTooltip();
+  });
   updateChart(currentMeasure);
 }

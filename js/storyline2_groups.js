@@ -9,6 +9,13 @@ function initStoryline2(roadUserData, ageData) {
   const containerAge = document.getElementById('chart-storyline2-age');
   if (!containerUsers || !containerAge) return;
 
+  function localized(value) {
+    const language = document.documentElement.dataset.language || 'en';
+    return window.translateCrashMetrics
+      ? window.translateCrashMetrics(value, language)
+      : value;
+  }
+
   containerUsers.innerHTML = '';
   containerAge.innerHTML = '';
 
@@ -88,7 +95,9 @@ function initStoryline2(roadUserData, ageData) {
     xUsersAxisGroup.transition(t).call(
       d3.axisBottom(xUsersScale).ticks(5).tickFormat(d3.format('~s'))
     );
-    yUsersAxisGroup.transition(t).call(d3.axisLeft(yUsersScale));
+    yUsersAxisGroup.transition(t).call(
+      d3.axisLeft(yUsersScale).tickFormat(value => localized(value))
+    );
 
     usersGridGroup.transition(t).call(
       d3.axisBottom(xUsersScale).ticks(5).tickSize(heightUsers).tickFormat('')
@@ -154,18 +163,18 @@ function initStoryline2(roadUserData, ageData) {
 
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">Road-User Mode</span>
+            <span class="tooltip-tag">${localized('Road-User Mode')}</span>
             <span class="tooltip-badge">${activeYear}</span>
           </div>
-          <div class="tooltip-title">${d.RoadUser}</div>
+          <div class="tooltip-title">${localized(d.RoadUser)}</div>
           <div class="tooltip-metric-row">
             <span class="tooltip-value">${window.formatNumber(d[activeMeasure])}</span>
-            <span class="tooltip-subvalue">${activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days'}</span>
+            <span class="tooltip-subvalue">${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</span>
           </div>
           <div class="tooltip-extra">
-            Admissions: <strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
-            Bed Days: <strong>${window.formatNumber(d.BedDays)}</strong><br>
-            Bed-Day Burden: <strong>${stayRatio} days / patient</strong>
+            ${localized('Admissions:')}<strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
+            ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>
+            ${localized('Bed-Day Burden:')}<strong>${stayRatio} ${localized('days / patient')}</strong>
           </div>
         `);
       })
@@ -195,7 +204,9 @@ function initStoryline2(roadUserData, ageData) {
 
     yAgeScale.domain([0, maxAgeVal * 1.18]);
 
-    xAgeAxisGroup.transition(t).call(d3.axisBottom(xAgeScale))
+    xAgeAxisGroup.transition(t).call(
+      d3.axisBottom(xAgeScale).tickFormat(value => localized(value))
+    )
       .selectAll('text')
       .attr('transform', 'rotate(-28)')
       .style('text-anchor', 'end')
@@ -305,18 +316,18 @@ function initStoryline2(roadUserData, ageData) {
 
         window.showTooltip(event, `
           <div class="tooltip-header">
-            <span class="tooltip-tag">Age Bracket</span>
+            <span class="tooltip-tag">${localized('Age Bracket')}</span>
             <span class="tooltip-badge">${activeYear}</span>
           </div>
-          <div class="tooltip-title">Age Group: ${d.AgeGroup}</div>
+          <div class="tooltip-title">${localized('Age Group:')}${localized(d.AgeGroup)}</div>
           <div class="tooltip-metric-row">
             <span class="tooltip-value">${window.formatNumber(d[activeMeasure])}</span>
-            <span class="tooltip-subvalue">${activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days'}</span>
+            <span class="tooltip-subvalue">${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</span>
           </div>
           <div class="tooltip-extra">
-            Admissions: <strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
-            Bed Days: <strong>${window.formatNumber(d.BedDays)}</strong><br>
-            Average Stay: <strong>${stayRatio} days / patient</strong>
+            ${localized('Admissions:')}<strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
+            ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong><br>
+            ${localized('Average Stay:')}<strong>${stayRatio} ${localized('days / patient')}</strong>
           </div>
         `);
       })
@@ -431,5 +442,9 @@ function initStoryline2(roadUserData, ageData) {
     updateCharts();
   };
 
+  window.addEventListener('crashmetrics:languagechange', () => {
+    updateCharts();
+    window.hideTooltip();
+  });
   updateCharts();
 }
