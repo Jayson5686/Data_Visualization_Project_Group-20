@@ -156,7 +156,44 @@ const languageCatalog = {
     "自動車の乗員（運転者と同乗者）が入院全体の約半数を占め、次いで二輪車利用者、自転車利用者が続きます。病床日数に切り替えると、高齢者（65～74歳、75歳以上）は事故1件あたり平均6.5日以上、二輪車利用者は重い整形外科的外傷により、入院期間が長いことが分かります。"
   ],
   "Geographic & Temporal Matrix": ["地理与时间矩阵", "Matriks Geografi dan Temporal", "地域・時系列マトリックス"],
+  "Annual State Map": ["州和领地年度地图", "Peta Tahunan Negeri dan Wilayah", "州・準州の年間マップ"],
   "State & Territory Variations": ["州和领地差异", "Perbezaan Negeri dan Wilayah", "州・準州による違い"],
+  "Select map year": ["选择地图年份", "Pilih tahun peta", "地図の年を選択"],
+  "Select a state on the map to update its trend chart. The map shows annual state and territory totals, not crash locations or per-person rates; differences in population size matter.": [
+    "选择地图上的州或领地以更新趋势图。地图显示各州和领地的年度总数，并非事故地点或人均比率；比较时请注意人口规模差异。",
+    "Pilih negeri atau wilayah pada peta untuk mengemas kini carta trendnya. Peta menunjukkan jumlah tahunan mengikut negeri dan wilayah, bukannya lokasi kemalangan atau kadar per kapita; perbezaan saiz penduduk perlu diambil kira.",
+    "地図上の州・準州を選択すると推移グラフが更新されます。地図は州・準州ごとの年間合計を示しており、事故地点や人口あたりの率ではありません。人口規模の違いに注意してください。"
+  ],
+  "Choose a year and measure. Select a state or territory to update the trend chart.": [
+    "选择年份和指标。选择州或领地以更新趋势图。",
+    "Pilih tahun dan ukuran. Pilih negeri atau wilayah untuk mengemas kini carta trend.",
+    "年と指標を選択してください。州・準州を選択すると推移グラフが更新されます。"
+  ],
+  "Schematic map of state and territory annual totals": [
+    "州和领地年度总数示意地图",
+    "Peta skematik jumlah tahunan negeri dan wilayah",
+    "州・準州ごとの年間合計を示す模式図"
+  ],
+  "Schematic state-level map; boundaries are not to scale.": [
+    "州级示意地图；边界并非按比例绘制。",
+    "Peta skematik peringkat negeri; sempadan tidak mengikut skala.",
+    "州・準州の模式図です。境界線は縮尺どおりではありません。"
+  ],
+  "Schematic state cartogram; boundaries and positions are illustrative, not to scale.": [
+    "州和领地示意地图；边界和位置仅供说明，并非按比例绘制。",
+    "Kartogram skematik negeri dan wilayah; sempadan dan kedudukan adalah ilustrasi dan tidak mengikut skala.",
+    "州・準州の模式図です。境界や位置は説明用であり、縮尺どおりではありません。"
+  ],
+  "Compare all years in the heatmap matrix": [
+    "在热力图矩阵中比较所有年份",
+    "Bandingkan semua tahun dalam matriks peta haba",
+    "ヒートマップで全年度を比較"
+  ],
+  "Read rows as states or territories and columns as years. Select a cell to switch the map to that year and state. The matrix stays open for further selections.": [
+    "每一行代表一个州或领地，每一列代表一年。选择单元格可将地图切换到对应年份和州或领地。矩阵会保持展开，方便继续选择。",
+    "Baris mewakili negeri atau wilayah dan lajur mewakili tahun. Pilih sel untuk menukar peta kepada tahun dan negeri tersebut. Matriks kekal terbuka untuk pilihan seterusnya.",
+    "行は州・準州、列は年を表します。セルを選択すると、地図がその年と州・準州に切り替わります。続けて選択できるよう、マトリックスは開いたままです。"
+  ],
   "Click any state row in the matrix to inspect its 11-year trajectory": ["点击矩阵中的州行，查看其 11 年趋势", "Klik mana-mana baris negeri dalam matriks untuk melihat trajektori 11 tahunnya", "マトリックスの州・準州の行をクリックして、11年間の推移を確認できます"],
   "Storyline 3 Measure Selector": ["故事线 3 指标选择", "Pemilih Ukuran Cerita 3", "ストーリー3の指標選択"],
   "State and Territory Heatmap Matrix": ["州和领地热力图矩阵", "Matriks Peta Haba Negeri dan Wilayah", "州・準州のヒートマップ"],

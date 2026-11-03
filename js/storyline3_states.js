@@ -17,8 +17,31 @@ function initStoryline3(stateData) {
 
   const states = ['NSW', 'Vic', 'Qld', 'WA', 'SA', 'Tas', 'ACT', 'NT'];
   const years = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021];
+  let activeMapYear = window.AppState.activeYearS3 || 2021;
   let focusedState = states[0];
   let focusedYear = years[0];
+
+  const mapRegions = [
+    { State: 'WA', path: 'M28,83 L190,74 L200,105 L194,188 L182,211 L185,278 L157,313 L105,308 L76,288 L55,251 L35,224 Z', labelX: 111, labelY: 190 },
+    { State: 'NT', path: 'M204,37 L337,36 L344,69 L340,164 L321,179 L202,170 L199,99 Z', labelX: 270, labelY: 112 },
+    { State: 'SA', path: 'M200,180 L337,181 L349,208 L345,322 L321,346 L222,331 L184,296 L189,246 Z', labelX: 267, labelY: 268 },
+    { State: 'Qld', path: 'M350,38 L455,37 L500,61 L501,190 L477,221 L449,205 L405,211 L350,176 L343,100 Z', labelX: 423, labelY: 133 },
+    { State: 'NSW', path: 'M351,218 L480,224 L485,276 L468,331 L445,357 L351,350 L345,322 L348,263 Z', labelX: 415, labelY: 288 },
+    { State: 'ACT', path: 'M435,333 L444,328 L451,335 L447,345 L438,346 Z', labelX: 472, labelY: 326 },
+    { State: 'Vic', path: 'M349,357 L442,364 L463,352 L452,395 L422,414 L366,406 L341,385 Z', labelX: 402, labelY: 385 },
+    { State: 'Tas', path: 'M425,431 L452,427 L466,443 L457,466 L439,470 L425,454 Z', labelX: 446, labelY: 450 }
+  ];
+
+  const stateMapSvg = d3.select('#chart-storyline3-state-map')
+    .append('svg')
+    .attr('class', 'chart-svg state-map-svg')
+    .attr('viewBox', '0 0 530 490')
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .attr('role', 'group')
+    .attr('aria-label', 'Schematic state-level map; boundaries are not to scale');
+
+  const stateMapGroup = stateMapSvg.append('g')
+    .attr('class', 'state-map-regions');
 
   // 1. Setup Heatmap Matrix (Dark Left Pane)
   const marginHm = { top: 20, right: 16, bottom: 34, left: 50 };
@@ -229,6 +252,7 @@ function initStoryline3(stateData) {
         window.hideTooltip();
       })
       .on('click', function(event, d) {
+        selectMapYear(d.Year);
         selectState(d.State);
         setFocusedCell(d.State, d.Year, false);
       })
@@ -238,6 +262,7 @@ function initStoryline3(stateData) {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           event.stopPropagation();
+          selectMapYear(d.Year);
           selectState(d.State);
           return;
         }
@@ -259,10 +284,93 @@ function initStoryline3(stateData) {
         setFocusedCell(states[stateIndex], years[yearIndex], true);
       });
 
+    updateStateMap(t);
     updateLegendCanvas(maxVal);
     renderHeatmapTable();
     updateStateLineChart();
     if (window.refreshDataTable) window.refreshDataTable('storyline3');
+  }
+
+  function updateStateMap(transition = d3.transition().duration(window.chartMotionDuration(400))) {
+    const mapData = stateData
+      .filter(d => d.Year === Number(activeMapYear))
+      .sort((a, b) => mapRegions.findIndex(region => region.State === a.State) - mapRegions.findIndex(region => region.State === b.State));
+    const regions = stateMapGroup.selectAll('.state-map-region')
+      .data(mapData, d => d.State);
+
+    regions.join(
+      enter => {
+        const group = enter.append('g')
+          .attr('class', 'state-map-region')
+          .attr('role', 'button')
+          .attr('tabindex', 0)
+          .attr('aria-keyshortcuts', 'Enter Space')
+          .on('click', (event, d) => selectState(d.State))
+          .on('keydown', (event, d) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              selectState(d.State);
+            }
+          })
+          .on('mouseenter', (event, d) => {
+            window.showTooltip(event, `
+              <div class="tooltip-header">
+                <span class="tooltip-tag">${localized('State / Territory')}</span>
+                <span class="tooltip-badge">${d.Year}</span>
+              </div>
+              <div class="tooltip-title">${localizedStateName(d.State)}</div>
+              <div class="tooltip-metric-row">
+                <span class="tooltip-value">${window.formatNumber(d[activeMeasure])}</span>
+                <span class="tooltip-subvalue">${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</span>
+              </div>
+              <div class="tooltip-extra">
+                ${localized('Admissions:')}<strong>${window.formatNumber(d.Hospitalisations)}</strong><br>
+                ${localized('Bed Days:')}<strong>${window.formatNumber(d.BedDays)}</strong>
+              </div>
+            `);
+          })
+          .on('mouseleave', window.hideTooltip);
+
+        group.append('path')
+          .attr('class', 'state-map-shape')
+          .attr('d', d => mapRegions.find(region => region.State === d.State).path);
+        group.append('text')
+          .attr('class', 'state-map-code')
+          .attr('text-anchor', 'middle')
+          .attr('pointer-events', 'none')
+          .attr('x', d => mapRegions.find(region => region.State === d.State).labelX)
+          .attr('y', d => mapRegions.find(region => region.State === d.State).labelY);
+        group.append('text')
+          .attr('class', 'state-map-value')
+          .attr('text-anchor', 'middle')
+          .attr('pointer-events', 'none')
+          .attr('x', d => mapRegions.find(region => region.State === d.State).labelX)
+          .attr('y', d => mapRegions.find(region => region.State === d.State).labelY + 22);
+        return group;
+      },
+      update => update,
+      exit => exit.remove()
+    )
+      .classed('active', d => d.State === activeState)
+      .attr('aria-pressed', d => d.State === activeState ? 'true' : 'false')
+      .attr('aria-label', d => `${localized('Select state ')}${localizedStateName(d.State)}. ${d.Year}. ${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}: ${window.formatNumber(d[activeMeasure])}.`)
+      .select('.state-map-shape')
+      .transition(transition)
+      .attr('fill', d => colorScale(d[activeMeasure]));
+
+    stateMapGroup.selectAll('.state-map-region')
+      .each(function(d) {
+        const region = d3.select(this);
+        region.select('.state-map-code').text(d.State);
+        region.select('.state-map-value').text(window.formatNumber(d[activeMeasure]));
+      });
+  }
+
+  function selectMapYear(year) {
+    activeMapYear = Number(year);
+    window.AppState.activeYearS3 = activeMapYear;
+    if (yearSelect) yearSelect.value = String(activeMapYear);
+    updateStateMap();
   }
 
   function selectState(stateCode) {
@@ -276,6 +384,9 @@ function initStoryline3(stateData) {
     if (badge)     badge.textContent = localized(`${activeState} Trajectory`);
 
     gHm.selectAll('.heatmap-cell')
+      .classed('active', d => d.State === activeState)
+      .attr('aria-pressed', d => d.State === activeState ? 'true' : 'false');
+    stateMapGroup.selectAll('.state-map-region')
       .classed('active', d => d.State === activeState)
       .attr('aria-pressed', d => d.State === activeState ? 'true' : 'false');
 
@@ -439,6 +550,14 @@ function initStoryline3(stateData) {
     });
   }
 
+  const yearSelect = document.getElementById('s3-year-select');
+  if (yearSelect) {
+    yearSelect.value = String(activeMapYear);
+    yearSelect.addEventListener('change', event => {
+      selectMapYear(event.target.value);
+    });
+  }
+
   const btnHosp = document.getElementById('s3-btn-hosp');
   const btnBeds = document.getElementById('s3-btn-beds');
 
@@ -466,7 +585,10 @@ function initStoryline3(stateData) {
 
   window.reset3 = () => {
     activeMeasure = 'Hospitalisations';
+    activeMapYear = 2021;
     window.AppState.activeMeasureS3 = activeMeasure;
+    window.AppState.activeYearS3 = activeMapYear;
+    if (yearSelect) yearSelect.value = String(activeMapYear);
     if (btnHosp) btnHosp.classList.add('active');
     if (btnBeds) btnBeds.classList.remove('active');
     if (btnHosp) btnHosp.setAttribute('aria-pressed', 'true');

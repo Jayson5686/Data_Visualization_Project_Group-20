@@ -91,7 +91,7 @@
               <div>
                 <div class="eyebrow-row">
                   <span class="section-num-pill dark-num-pill">03</span>
-                  <span class="section-eyebrow dark-eyebrow">Geographic &amp; Temporal Matrix</span>
+                  <span class="section-eyebrow dark-eyebrow">Annual State Map</span>
                 </div>
                 <h1 id="s3-title" class="dark-pane-title">State &amp; Territory Variations</h1>
                 <p class="dark-pane-subtitle">Select a state or territory to inspect its 11-year trajectory</p>
@@ -101,20 +101,36 @@
                 <button class="clean-pill-btn active" data-measure="Hospitalisations" id="s3-btn-hosp" aria-pressed="true">Admissions</button>
                 <button class="clean-pill-btn" data-measure="BedDays" id="s3-btn-beds" aria-pressed="false">Bed Days</button>
               </div>
+              <label class="map-year-control" for="s3-year-select">
+                <span>Year</span>
+                <select id="s3-year-select" aria-label="Select map year">
+                  <option value="2011">2011</option><option value="2012">2012</option>
+                  <option value="2013">2013</option><option value="2014">2014</option>
+                  <option value="2015">2015</option><option value="2016">2016</option>
+                  <option value="2017">2017</option><option value="2018">2018</option>
+                  <option value="2019">2019</option><option value="2020">2020</option>
+                  <option value="2021" selected>2021</option>
+                </select>
+              </label>
             </div>
 
             <aside class="story-guide" id="s3-story-guide" aria-label="Story guide">
               <h2>Story guide</h2>
-              <p>Read rows as states or territories and columns as years. Select a heatmap cell to update the trend chart. These are raw totals, not per-person rates, so differences in population size matter.</p>
+              <p>Select a state on the map to update its trend chart. The map shows annual state and territory totals, not crash locations or per-person rates; differences in population size matter.</p>
             </aside>
 
-            <!-- Heatmap SVG Container -->
-            <p class="heatmap-instructions" id="s3-heatmap-instructions">Use arrow keys to move through the grid; press Enter or Space to select a state and update its trend.</p>
-            <div class="heatmap-stage" id="chart-storyline3-heatmap" role="region" aria-label="State and Territory Heatmap Matrix" aria-describedby="s3-story-guide s3-heatmap-instructions"></div>
+            <p class="heatmap-instructions" id="s3-heatmap-instructions">Choose a year and measure. Select a state or territory to update the trend chart.</p>
+            <div class="state-map-stage" id="chart-storyline3-state-map" role="region" aria-label="Schematic map of state and territory annual totals" aria-describedby="s3-story-guide s3-heatmap-instructions"></div>
+            <p class="state-map-caption">Schematic state cartogram; boundaries and positions are illustrative, not to scale.</p>
 
-            <details class="heatmap-values-details">
-              <summary>Show heatmap values as a table</summary>
-              <div class="heatmap-table-scroll" id="s3-heatmap-table" role="region" aria-label="State and Territory values" tabindex="0"></div>
+            <details class="heatmap-values-details" id="s3-year-matrix-details">
+              <summary>Compare all years in the heatmap matrix</summary>
+              <p class="matrix-instructions">Read rows as states or territories and columns as years. Select a cell to switch the map to that year and state. The matrix stays open for further selections.</p>
+              <div class="heatmap-stage" id="chart-storyline3-heatmap" role="region" aria-label="State and Territory Heatmap Matrix" aria-describedby="s3-story-guide s3-heatmap-instructions"></div>
+              <details class="heatmap-values-details">
+                <summary>Show heatmap values as a table</summary>
+                <div class="heatmap-table-scroll" id="s3-heatmap-table" role="region" aria-label="State and Territory values" tabindex="0"></div>
+              </details>
             </details>
 
             <!-- Bottom Legend & Floating Station-Style Callout Card (bikerental.webp #38 Cabo Jubi Station style) -->

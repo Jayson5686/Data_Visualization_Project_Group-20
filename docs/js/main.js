@@ -9,6 +9,7 @@ window.AppState = {
   activeMeasureS2: 'Hospitalisations',
   activeYearS2: 2011,
   activeMeasureS3: 'Hospitalisations',
+  activeYearS3: 2021,
   activeStateS3: 'NSW',
   activeYearS4: 2011
 };

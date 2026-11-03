@@ -293,6 +293,92 @@
   color: #14171A;
 }
 
+.map-year-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.map-year-control select {
+  min-width: 6rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.65rem;
+  background: #20252b;
+  color: #FFFFFF;
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.state-map-stage {
+  width: min(100%, 38rem);
+  margin: 0 auto;
+}
+
+.state-map-svg {
+  display: block;
+  width: 100%;
+  max-height: 34rem;
+  overflow: visible;
+}
+
+.state-map-shape {
+  stroke: #171A1F;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  transition: stroke-width 160ms ease;
+}
+
+.state-map-region {
+  cursor: pointer;
+  outline: none;
+}
+
+.state-map-region.active .state-map-shape {
+  stroke: #FFFFFF;
+  stroke-width: 6;
+}
+
+.state-map-region:focus-visible .state-map-shape {
+  stroke: var(--accent-amber);
+  stroke-width: 7;
+}
+
+.state-map-code,
+.state-map-value {
+  fill: #FFFFFF;
+  paint-order: stroke;
+  stroke: #171A1F;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.state-map-code {
+  font-size: 15px;
+  font-weight: 800;
+  stroke-width: 3px;
+}
+
+.state-map-value {
+  font-size: 11px;
+  font-weight: 700;
+  stroke-width: 2.5px;
+}
+
+.state-map-caption,
+.matrix-instructions {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
 .heatmap-stage {
   margin: 0.5rem 0;
 }
