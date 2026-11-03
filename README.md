@@ -9,7 +9,7 @@ An interactive, responsive, and accessible editorial data visualisation web appl
 
 Modern web browsers block loading local data files (`d3.csv()`) directly from `file:///` URLs due to CORS security rules. Therefore, the app must be served via any local HTTP server.
 
-The site includes a language selector for English, Simplified Chinese, Malay, and Japanese. The selected language is saved in the browser and carried between the About, About Data, and dashboard pages. Chart CSV downloads retain their original English column names and values.
+The site includes a language selector for English, Simplified Chinese, Malay, and Japanese. The selected language is saved in the browser and carried between the About, About Data, dashboard overview, and storyline pages. The dashboard overview links to four focused pages: National, Users & Age, States, and First Nations. Chart CSV downloads retain their original English column names and values.
 
 ### Option 1: Quick Double-Click (Windows)
 Double-click **`start_app.bat`**. It will automatically spin up the local server and open your default browser to the dashboard at **`http://localhost:8000/index.html?dashboard=1`**. When the site is opened at its normal entry URL, it starts on the About page; use the About Data link to view the data information second.
@@ -42,7 +42,11 @@ npx http-server
 
 ```
 COS30045_Project/
-├── index.html                  # Main semantic structure & bento viewport
+├── index.html                  # Dashboard overview and storyline links
+├── national.html               # Storyline 1: National trends
+├── users-age.html              # Storyline 2: Road-user and age comparisons
+├── states.html                 # Storyline 3: State and territory patterns
+├── first-nations.html          # Storyline 4: First Nations patterns
 ├── css/
 │   ├── style.css               # Core layout, editorial typography tokens, preloader
 │   └── components.css          # Bento cards, pill toggles, sliders, SVG styling, tooltips
