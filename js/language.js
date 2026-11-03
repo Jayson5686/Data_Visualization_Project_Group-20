@@ -237,7 +237,7 @@ const languageCatalog = {
   "Preview each year as it changes; click a point to select its mode and age breakdowns": ["逐年预览变化；点击数据点以查看出行方式和年龄细分", "Lihat perubahan setiap tahun; klik titik untuk memilih pecahan mod perjalanan dan umur", "年ごとの変化を確認し、点をクリックして移動手段・年齢別の内訳を表示"],
   "National NHMD Cohort": ["全国 NHMD 队列", "Kohort NHMD Nasional", "全国NHMDコホート"],
   "11-Year Trajectory": ["11 年趋势", "Trajektori 11 Tahun", "11年間の推移"],
-  "Recorded hospital admissions rose from 1,167 in 2011 to 2,059 in 2021.": ["记录的住院人数从 2011 年的 1,167 人增至 2021 年的 2,059 人。", "Kemasukan hospital yang direkodkan meningkat daripada 1,167 pada 2011 kepada 2,059 pada 2021.", "記録された入院数は、2011年の1,167人から2021年の2,059人に増加しました。"],
+  "Recorded hospital admissions rose from 1,167 in 2011 to 2,220 in 2021.": ["记录的住院人数从 2011 年的 1,167 人增至 2021 年的 2,220 人，增长了 90.2%。", "Kemasukan hospital yang direkodkan meningkat daripada 1,167 pada 2011 kepada 2,220 pada 2021, iaitu peningkatan sebanyak 90.2%.", "記録された入院数は、2011年の1,167人から2021年の2,220人に90.2%増加しました。"],
   "Hatched Slot = 'n.p.' Suppressed": ["斜线标记 = 已隐藏的“n.p.”数据", "Petak Berjalur = Data 'n.p.' Disembunyikan", "斜線の枠 = 非公開の「n.p.」データ"],
   "To protect patient confidentiality under AIHW protocols, small counts (< 5 cases) are marked n.p. and rendered as diagonal hatched slots rather than zero.": [
     "根据 AIHW 保密规定，为保护患者隐私，少于 5 例的小计数标记为 n.p.，并以斜线图案显示，而不是记为零。",
@@ -690,10 +690,10 @@ const richLanguageCatalog = {
     "Dalam peta haba, gunakan keempat-empat kekunci anak panah untuk bergerak mengikut tahun dan negeri. Dalam carta lain, gunakan <strong>anak panah kiri/kanan</strong> untuk menelusuri data; titik carta garis mengikut turutan tahun. Tekan <strong>Enter</strong> atau <strong>Space</strong> pada sel peta haba untuk memilih negeri.",
     "ヒートマップでは上下左右の矢印キーで年と州を移動します。他のグラフでは<strong>左右の矢印キー</strong>でデータを移動し、折れ線グラフの点は年順に並びます。ヒートマップのセルで<strong>Enter</strong>または<strong>Space</strong>を押すと州を選択できます。"
   ],
-  "Recorded hospital admissions rose from 1,167 in 2011 to 2,059 in 2021.": [
-    "记录的住院人数从 2011 年的 1,167 人增至 2021 年的 2,059 人。",
-    "Kemasukan hospital yang direkodkan meningkat daripada 1,167 pada 2011 kepada 2,059 pada 2021.",
-    "記録された入院数は、2011年の1,167人から2021年の2,059人に増加しました。"
+  "Recorded hospital admissions rose from 1,167 in 2011 to 2,220 in 2021.": [
+    "记录的住院人数从 2011 年的 1,167 人增至 2021 年的 2,220 人，增长了 90.2%。",
+    "Kemasukan hospital yang direkodkan meningkat daripada 1,167 pada 2011 kepada 2,220 pada 2021, iaitu peningkatan sebanyak 90.2%.",
+    "記録された入院数は、2011年の1,167人から2021年の2,220人に90.2%増加しました。"
   ],
   "To protect patient confidentiality under AIHW protocols, small counts (< 5 cases) are marked n.p. and rendered as diagonal hatched slots rather than zero.": [
     "根据 AIHW 保密规定，为保护患者隐私，少于 5 例的数值标记为 <strong>n.p.</strong>，并以斜线图案显示，而不是记为零。",

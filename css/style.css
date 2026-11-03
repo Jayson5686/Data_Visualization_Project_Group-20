@@ -1,7 +1,6 @@
 /* ==========================================================================
    CrashMetrics Australia — COS30045 Data Visualisation
-   Design System: Atmospheric Framed Hero (designsample3.mp4 / webdesign.webp)
-   + Tactile Alabaster & Charcoal Bento Workspace (dashboarddesign.webp / bikerental.webp)
+   Design System: Atmospheric Framed Hero + Tactile Alabaster & Charcoal Bento Workspace 
    ========================================================================== */
 
 :root {
@@ -26,7 +25,7 @@
   --ink-on-dark: #F8FAFC;
   --ink-on-dark-muted: #94A3B8;
 
-  /* Accents & Semantic Badge Tokens (dashboarddesign.webp & bikerental.webp) */
+  /* Accents & Semantic Badge Tokens  */
   --accent-amber: #F59E0B;
   --accent-amber-deep: #D97706;
   --accent-emerald: #10B981;
@@ -51,7 +50,7 @@
   --strip-icon-bg: #111417;
   --strip-icon-fg: #FFFFFF;
 
-  /* Typography Families (No programmer monospace!) */
+  /* Typography Families  */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
 
@@ -95,7 +94,7 @@ body {
 }
 
 /* ==========================================================================
-   Preloader Overlay (designsample3.mp4 Framed Counter Style)
+   Preloader Overlay (Framed Counter Style)
    ========================================================================== */
 #preloader {
   position: fixed;
@@ -171,7 +170,7 @@ body {
 }
 
 /* ==========================================================================
-   HERO SHOWCASE (designsample3.mp4 WoodNest + webdesign.webp TerraElix)
+   HERO SHOWCASE 
    ========================================================================== */
 .hero-showcase {
   background: var(--bg-card-white);
@@ -213,7 +212,7 @@ body {
     radial-gradient(circle at 20% 40%, rgba(15, 25, 32, 0.4) 0%, transparent 60%);
 }
 
-/* Signature Rounded Inner Frame Border from designsample3.mp4 */
+/* Signature Rounded Inner Frame Border */
 .hero-inner-frame {
   position: relative;
   z-index: 2;
@@ -366,7 +365,7 @@ body {
   gap: 3.5rem;
 }
 
-/* Giant 3-Line Display Title (Nature's Perfect Hideaways / TerraElix exact typography) */
+/* Giant 3-Line Display Title  */
 .hero-display-title {
   font-family: var(--font-sans);
   font-size: clamp(3.1rem, 1.8rem + 4.5vw, 5.25rem);
@@ -427,7 +426,7 @@ body {
   color: rgba(255, 255, 255, 0.72);
 }
 
-/* Floating Smoked-Glass Surveillance Widget (Evergreen Pine Family Lodge exact card) */
+/* Floating Smoked-Glass Surveillance Widget */
 .hero-glass-widget {
   background: rgba(16, 22, 27, 0.78);
   backdrop-filter: blur(24px);
@@ -584,7 +583,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* Lower Architectural 3-Column Bento Strip (webdesign.webp bottom strip) */
+/* Lower Architectural 3-Column Bento Strip  */
 .hero-bento-strip {
   display: grid;
   grid-template-columns: 1.35fr 0.85fr 1fr;
@@ -729,7 +728,7 @@ body {
 }
 
 /* ==========================================================================
-   MAIN ANALYTICAL WORKSPACE & BENTO SHELLS (dashboarddesign.webp)
+   MAIN ANALYTICAL WORKSPACE & BENTO SHELLS 
    ========================================================================== */
 .bento-workspace {
   display: flex;
@@ -915,7 +914,7 @@ body {
 }
 
 /* ==========================================================================
-   Overview Inset Tray (Exact dashboarddesign.webp "Overview" nested cards)
+   Overview Inset Tray 
    ========================================================================== */
 .overview-inset-tray {
   background: var(--bg-card-recessed);
