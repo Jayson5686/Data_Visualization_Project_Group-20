@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review First Nations trends and breakdowns, including privacy-suppressed values.">
+  <title>04 First Nations &mdash; CrashMetrics Australia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/language.js" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="preloader" role="status" aria-live="polite">
+    <div class="preloader-frame">
+      <div class="preloader-top-progress" id="preloader-bar"></div>
+      <div class="preloader-bottom-row">
+        <div class="preloader-counter" id="preloader-counter">0%</div>
+        <div class="preloader-label">Loading Verified AIHW National Morbidity Records (2011&ndash;2021)</div>
+      </div>
+    </div>
+  </div>
+  <div id="global-tooltip" role="tooltip" aria-hidden="true"></div>
+  <div class="page-shell info-page-shell">
+    <header class="info-page-nav">
+      <a href="index.html?dashboard=1#top" class="brand-mark info-brand-mark">
+        <span class="brand-dot-cluster" aria-hidden="true"><span class="dot-amber"></span><span class="dot-amber-sm"></span></span>
+        <span class="brand-name">CrashMetrics</span><span class="brand-tag">AIHW 2011&ndash;21</span>
+      </a>
+      <nav class="info-page-links" aria-label="Primary Navigation">
+        <a href="about.html">About</a>
+        <a href="about-data.html">About Data</a>
+        <a href="index.html?dashboard=1">Dashboard</a>
+        <a href="national.html">01 National</a>
+        <a href="users-age.html">02 Users &amp; Age</a>
+        <a href="states.html">03 States</a>
+        <a href="first-nations.html" aria-current="page">04 First Nations</a>
+        <div class="nav-accessibility-controls">
+          <span class="sr-only" id="accessibility-controls-help">Use Left and Right Arrow keys to move through navigation links. Choose System, Light, Dark, High contrast, or Color-blind-friendly from the theme dropdown. Tab and Shift+Tab are also available.</span>
+          <label class="theme-control language-control">
+            <span>Language:</span>
+            <select id="language-selector" class="theme-control-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="zh-CN">简体中文</option>
+              <option value="ms">Bahasa Melayu</option>
+              <option value="ja">日本語</option>
+            </select>
+          </label>
+          <label class="theme-control">
+            <span>Theme:</span>
+            <select id="theme-selector" class="theme-control-select" aria-describedby="accessibility-controls-help">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="high-contrast">High contrast</option>
+              <option value="color-blind">Color-blind-friendly</option>
+            </select>
+          </label>
+          <label class="page-magnification-control">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="10.8" cy="10.8" r="6.3"></circle>
+              <path d="m15.4 15.4 5 5"></path>
+            </svg>
+            <span class="sr-only">Page magnification</span>
+            <select id="page-magnification" aria-describedby="accessibility-controls-help">
+              <option value="fit">Fit</option>
+              <option value="75">75%</option>
+              <option value="90">90%</option>
+              <option value="100">100%</option>
+              <option value="110">110%</option>
+              <option value="120">120%</option>
+            </select>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main id="main-content" class="bento-workspace storyline-page-workspace" tabindex="-1">
+      <nav class="storyline-pagination" aria-label="Storyline pages"><a href="states.html">&larr; 03 States</a><a href="index.html?dashboard=1">Back to dashboard overview</a></nav>
+      <section id="storyline4" class="storyline-block" aria-labelledby="s4-title">
+        <div class="bento-shell">
+          
+          <div class="bento-header">
+            <div class="bento-title-group">
+              <div class="eyebrow-row">
+                <span class="section-num-pill">04</span>
+                <span class="section-eyebrow">First Nations Road Safety &amp; Health Equity</span>
+              </div>
+              <h1 id="s4-title" class="bento-title">
+                What were the hospitalisation patterns among Aboriginal and Torres Strait Islander people <em>across years, modes, and ages?</em>
+              </h1>
+            </div>
+
+            <div class="bento-controls">
+              <div class="scrubber-pill">
+                <span class="scrubber-label">Breakdown Year</span>
+                <span class="scrubber-year" id="s4-year-badge" aria-live="polite" aria-atomic="true">2011</span>
+                <input type="range" min="2011" max="2021" value="2011" step="1" class="tactile-range" id="s4-year-slider" aria-label="Select Year for Storyline 4">
+                <button class="scrubber-play-btn" id="s4-play-btn" title="Play timeline animation" aria-label="Play timeline animation">▶</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="story-guide" id="s4-story-guide" aria-label="Story guide">
+            <h2>Story guide</h2>
+            <p>Choose a year to compare road-user and age-group breakdowns. A hatched n.p. cell means a small count is suppressed for privacy, not that the value is zero. The 65+ age group is consolidated in this dataset; these figures describe recorded admissions and do not explain their causes.</p>
+          </aside>
+
+          <!-- Top Architectural Row: Annual Trend Line + Stark Charcoal Metric Callout (enviromentaldesign.webp style) -->
+          <div class="fn-top-bento-row">
+            <div class="sub-bento-card fn-trend-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">Annual First Nations Hospitalisations (2011–2021)</h3>
+                  <p class="sub-card-subtitle">Preview each year as it changes; click a point to select its mode and age breakdowns</p>
+                </div>
+                <span class="chip-tag">National NHMD Cohort</span>
+              </div>
+              <div id="chart-storyline4-trend" role="region" aria-label="First Nations Annual Trend Line Chart" aria-describedby="s4-story-guide"></div>
+            </div>
+
+            <div class="fn-contrast-stat-box">
+              <div class="contrast-top">
+                <span class="contrast-eyebrow">11-Year Trajectory</span>
+                <div class="contrast-huge-pct">+76.4%</div>
+                <p class="contrast-desc">
+                  Recorded hospital admissions rose from <strong>1,167</strong> in 2011 to <strong>2,059</strong> in 2021.
+                </p>
+              </div>
+
+              <div class="contrast-divider"></div>
+
+              <div class="contrast-bottom">
+                <span class="np-pill-indicator">Hatched Slot = 'n.p.' Suppressed</span>
+                <p class="contrast-small-note">
+                  To protect patient confidentiality under AIHW protocols, small counts (&lt; 5 cases) are marked <strong>n.p.</strong> and rendered as diagonal hatched slots rather than zero.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom 2-Column Linked Breakdown Row -->
+          <div class="dual-bento-grid">
+            
+            <!-- Left: First Nations Road Users -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">First Nations Road-User Distribution</h3>
+                  <p class="sub-card-subtitle">Consolidated vehicle occupant groups · Hatched bars indicate suppressed 'n.p.' cells</p>
+                </div>
+                <span class="chip-tag chip-coral">Includes 'n.p.' Slots</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline4-users" role="region" aria-label="First Nations Road Users Bar Chart" aria-describedby="s4-story-guide"></div>
+            </div>
+
+            <!-- Right: First Nations Age Groups -->
+            <div class="sub-bento-card">
+              <div class="sub-card-header">
+                <div>
+                  <h3 class="sub-card-title">First Nations Age Group Distribution</h3>
+                  <p class="sub-card-subtitle">Older cohorts consolidated into '65+' reflecting Indigenous demographic structure</p>
+                </div>
+                <span class="chip-tag">65+ Consolidated</span>
+              </div>
+              <div class="chart-stage-compact" id="chart-storyline4-age" role="region" aria-label="First Nations Age Group Bar Chart" aria-describedby="s4-story-guide"></div>
+            </div>
+
+          </div>
+          <div class="section-actions">
+            <button type="button" class="utility-btn" data-view-data="storyline4" aria-controls="data-table-storyline4" aria-expanded="false">View Data</button>
+            <button type="button" class="utility-btn" data-download-csv="storyline4" title="Download all First Nations chart data as a CSV file">Download CSV</button>
+            <button type="button" class="utility-btn" data-reset-view="storyline4">Reset View</button>
+          </div>
+          <div class="data-table-panel" id="data-table-storyline4" hidden></div>
+
+        </div>
+      </section>
+      <nav class="storyline-pagination" aria-label="Storyline pages"><a href="states.html">&larr; 03 States</a><a href="index.html?dashboard=1">Back to dashboard overview</a></nav>
+    </main>
+    <footer class="editorial-footer info-page-footer">
+      <div class="footer-brand-col"><span class="footer-logo">CrashMetrics Australia</span><p class="footer-meta">Source: Australian Institute of Health and Welfare (AIHW) National Hospital Morbidity Database (NHMD).</p></div>
+      <nav class="footer-nav-col" aria-label="Footer Navigation">
+        <a href="about.html">About</a><a href="about-data.html">About Data</a><a href="index.html?dashboard=1">Dashboard</a>
+        <a href="national.html">01 National</a><a href="users-age.html">02 Users &amp; Age</a><a href="states.html">03 States</a><a href="first-nations.html" aria-current="page">04 First Nations</a>
+      </nav>
+    </footer>
+  </div>
+  <dialog class="help-dialog" id="help-dialog" aria-labelledby="help-title">
+    <div class="help-dialog-header">
+      <h2 id="help-title">How to Use CrashMetrics</h2>
+      <button type="button" class="utility-btn" id="help-close" aria-label="Close help">Close</button>
+    </div>
+    <ul>
+      <li>Use <strong>Left/Right Arrow</strong> to move through navigation links or chart data. Use <strong>Tab</strong> and <strong>Shift+Tab</strong> to move through all controls; use arrow keys to adjust a focused year slider.</li>
+      <li>Use the playback button to animate years; select it again to pause.</li>
+      <li>Choose a state from the dropdown or select a heatmap cell to inspect its trajectory.</li>
+      <li>For the heatmap, use all four arrow keys to move by year and state. Elsewhere, use <strong>Left/Right Arrow</strong> to move through chart data; line-chart points follow year order. Press <strong>Enter</strong> or <strong>Space</strong> on a heatmap cell to select a state.</li>
+      <li>Focus or point to chart marks for details. Press <strong>Esc</strong> to dismiss a tooltip.</li>
+      <li>Hatched <strong>n.p.</strong> values are not published to protect privacy; they are not zero.</li>
+    </ul>
+    <button type="button" class="utility-btn help-tour-start" id="help-tour-start">Still don't get it? Start the step-by-step tour</button>
+    <section class="help-tour" id="help-tour" aria-labelledby="help-tour-title" hidden>
+      <div class="help-tour-progress" id="help-tour-progress" role="status" aria-live="polite"></div>
+      <h3 id="help-tour-title" tabindex="-1"></h3>
+      <p id="help-tour-copy"></p>
+      <a class="utility-btn help-tour-link" id="help-tour-link"></a>
+      <div class="help-tour-controls">
+        <button type="button" class="utility-btn" id="help-tour-back">Back</button>
+        <button type="button" class="utility-btn" id="help-tour-next">Next</button>
+      </div>
+      <button type="button" class="help-tour-return" id="help-tour-return">Back to quick tips</button>
+    </section>
+  </dialog>
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Soft Warm Amber Gradient for Storyline 1 & State Line -->
+      <linearGradient id="area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.28"/>
+        <stop offset="85%" stop-color="var(--accent-amber)" stop-opacity="0.03"/>
+        <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Emerald Gradient for Active Vertical Bars (dashboarddesign.webp style) -->
+      <linearGradient id="emerald-bar-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="var(--accent-emerald)"/>
+        <stop offset="100%" stop-color="var(--accent-emerald)" stop-opacity="0.75"/>
+      </linearGradient>
+
+      <!-- Diagonal Hatch Pattern for Suppressed n.p. Records -->
+      <pattern id="diagonal-hatch-pattern" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <rect class="np-hatch-background" width="8" height="8" fill="#FFF1F0"/>
+        <line class="np-hatch-line" x1="0" y1="0" x2="0" y2="8" stroke="#F43F5E" stroke-width="2" stroke-opacity="0.65" />
+      </pattern>
+    </defs>
+  </svg>
+  <script src="js/storyline1_national.js"></script>
+  <script src="js/storyline2_groups.js"></script>
+  <script src="js/storyline3_states.js"></script>
+  <script src="js/storyline4_firstnations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
