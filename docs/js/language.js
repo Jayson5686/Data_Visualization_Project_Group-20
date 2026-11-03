@@ -11,6 +11,28 @@ const languageCatalog = {
   "Select language": ["选择语言", "Pilih bahasa", "言語を選択"],
   "Primary Navigation": ["主导航", "Navigasi Utama", "メインナビゲーション"],
   "Footer Navigation": ["页脚导航", "Navigasi Pengaki", "フッターナビゲーション"],
+  "Skip to main content": ["跳转到主要内容", "Langkau ke kandungan utama", "メインコンテンツへスキップ"],
+  "Story guide": ["故事指南", "Panduan cerita", "ストーリーガイド"],
+  "Follow the national trend from 2011 to 2021, then compare admissions with bed days. Reporting changes and the 2020 pandemic period provide context for interpreting changes over time.": [
+    "查看 2011 至 2021 年的全国趋势，并比较住院次数与住院床日。报告口径变化和 2020 年疫情时期有助于理解趋势变化。",
+    "Ikuti trend nasional dari 2011 hingga 2021, kemudian bandingkan kemasukan dengan hari katil. Perubahan pelaporan dan tempoh pandemik 2020 memberi konteks untuk mentafsir perubahan dari semasa ke semasa.",
+    "2011年から2021年までの全国的な推移を確認し、入院件数と病床日数を比較します。報告方法の変更や2020年のパンデミック期間を踏まえて、経年変化を読み取ってください。"
+  ],
+  "Choose a year and compare road-user categories with age groups. Switch between admissions and bed days: admissions count hospital stays, while bed days count inpatient days. The data table provides exact values without relying on chart colour or hover.": [
+    "选择年份，比较道路使用者类别与年龄组。切换住院次数和住院床日：住院次数统计住院记录，床日统计住院天数。数据表提供准确数值，无需依赖图表颜色或悬停提示。",
+    "Pilih tahun dan bandingkan kategori pengguna jalan raya dengan kumpulan umur. Tukar antara kemasukan dan hari katil: kemasukan mengira rekod kemasukan hospital, manakala hari katil mengira hari pesakit dalam. Jadual data memaparkan nilai tepat tanpa bergantung pada warna carta atau petua apabila penuding diletakkan di atas carta.",
+    "年を選び、道路利用者の区分と年齢層を比較します。入院件数と病床日数を切り替えてください。データ表では、色やホバー操作に頼らず正確な値を確認できます。"
+  ],
+  "Read rows as states or territories and columns as years. Select a heatmap cell to update the trend chart. These are raw totals, not per-person rates, so differences in population size matter.": [
+    "行は州・準州、列は年を表します。ヒートマップのセルを選択すると推移グラフが更新されます。数値は人口あたりの率ではなく合計値のため、人口規模の違いに注意してください。",
+    "Baris mewakili negeri atau wilayah dan lajur mewakili tahun. Pilih sel peta haba untuk mengemas kini carta trend. Nilai ini ialah jumlah mentah, bukannya kadar per kapita, jadi perbezaan saiz penduduk perlu diambil kira.",
+    "每一行代表一个州或领地，每一列代表一年。选择热图单元格以更新趋势图。这些是总数而非人均比率，因此人口规模差异会影响比较。"
+  ],
+  "Choose a year to compare road-user and age-group breakdowns. A hatched n.p. cell means a small count is suppressed for privacy, not that the value is zero. The 65+ age group is consolidated in this dataset; these figures describe recorded admissions and do not explain their causes.": [
+    "选择年份以比较道路使用者和年龄组的细分数据。带斜线的 n.p. 单元格表示因隐私保护而隐藏了较小计数，并不代表数值为零。本数据集将 65 岁及以上合并为一组；这些数字记录住院情况，但不能说明其原因。",
+    "Pilih tahun untuk membandingkan pecahan mengikut pengguna jalan raya dan kumpulan umur. Sel n.p. berjalur bermaksud bilangan kecil disembunyikan demi privasi, bukannya nilainya sifar. Kumpulan umur 65+ digabungkan dalam set data ini; angka ini merekodkan kemasukan hospital tetapi tidak menerangkan puncanya.",
+    "年を選び、道路利用者と年齢層の内訳を比較します。斜線付きの n.p. は、プライバシー保護のため少数値が非公開であることを示し、ゼロを意味しません。このデータでは65歳以上を統合しています。記録された入院数は、その原因を説明するものではありません。"
+  ],
   "Use Left and Right Arrow keys to move through navigation links. Choose System, Light, Dark, High contrast, or Color-blind-friendly from the theme dropdown. Tab and Shift+Tab are also available.": [
     "使用向左和向右箭头键浏览导航链接。可在主题菜单中选择系统、浅色、深色、高对比度或色觉友好模式。也可以使用 Tab 和 Shift+Tab。",
     "Gunakan kekunci anak panah kiri dan kanan untuk menavigasi pautan. Pilih Sistem, Cerah, Gelap, Kontras tinggi atau Mesra buta warna daripada menu tema. Tab dan Shift+Tab juga boleh digunakan.",
@@ -194,7 +216,11 @@ const languageCatalog = {
     "左右の矢印キーでナビゲーションリンクやグラフデータを移動できます。すべての操作にはTabとShift+Tabを使用し、年スライダーは矢印キーで調整します。"
   ],
   "Use the playback button to animate years; select it again to pause.": ["使用播放按钮逐年浏览；再次选择即可暂停。", "Gunakan butang main untuk menelusuri tahun; pilih sekali lagi untuk menjeda.", "再生ボタンで年ごとの変化を表示し、もう一度押すと一時停止します。"],
-  "Choose a state from the dropdown or select a heatmap row to inspect its trajectory.": ["从下拉菜单选择州，或选择热力图中的一行查看其趋势。", "Pilih negeri daripada menu lungsur atau pilih baris peta haba untuk melihat trajektorinya.", "ドロップダウンから州・準州を選ぶか、ヒートマップの行を選択して推移を確認します。"],
+  "Choose a state from the dropdown or select a heatmap cell to inspect its trajectory.": [
+    "从下拉菜单选择州，或选择热力图中的单元格查看其趋势。",
+    "Pilih negeri daripada menu lungsur atau pilih sel peta haba untuk melihat trajektorinya.",
+    "ドロップダウンから州・準州を選ぶか、ヒートマップのセルを選択して推移を確認します。"
+  ],
   "Focus a chart mark and use Left/Right Arrow to move backward or forward through its data; line-chart points follow year order. Press Enter on an interactive mark to select it.": [
     "聚焦图表标记后，使用向左/向右箭头浏览数据；折线图数据点按年份排列。按 Enter 可选择可交互的标记。",
     "Fokus pada tanda carta dan gunakan anak panah kiri/kanan untuk bergerak melalui datanya; titik carta garis mengikut turutan tahun. Tekan Enter pada tanda interaktif untuk memilihnya.",
@@ -341,6 +367,16 @@ const languageCatalog = {
   " of ": [" / ", " daripada ", " / "],
   "11-Year Total: ": ["11 年总计：", "Jumlah 11 Tahun: ", "11年間の合計："],
   "Annual First Nations admissions": ["原住民年度住院人数", "Kemasukan Tahunan Orang Asal", "先住民の年間入院数"],
+  "First Nations Annual": ["原住民年度数据", "Data Tahunan Orang Asal", "先住民の年間データ"],
+  "Hospital Admissions": ["住院人数", "Kemasukan hospital", "入院数"],
+  "vs 2011": ["较 2011 年", "berbanding 2011", "2011年比"],
+  "Click this point to filter the road-user and age breakdowns below.": [
+    "点击此数据点，筛选下方的道路使用者和年龄细分数据。",
+    "Klik titik ini untuk menapis pecahan pengguna jalan raya dan umur di bawah.",
+    "この点をクリックすると、下の道路利用者別・年齢別の内訳を絞り込めます。"
+  ],
+  "Play timeline animation": ["播放时间轴动画", "Mainkan animasi garis masa", "タイムラインを再生"],
+  "Pause timeline animation": ["暂停时间轴动画", "Jeda animasi garis masa", "タイムラインを一時停止"],
   "National data · ": ["全国数据 · ", "Data nasional · ", "全国データ · "],
   "Road-user categories · ": ["道路使用者类别 · ", "Kategori pengguna jalan raya · ", "道路利用者の区分 · "],
   "Age groups · ": ["年龄组 · ", "Kumpulan umur · ", "年齢層 · "],
@@ -350,6 +386,12 @@ const languageCatalog = {
   "State/Territory": ["州/领地", "Negeri/Wilayah", "州・準州"],
   "Road-user categories": ["道路使用者类别", "Kategori pengguna jalan raya", "道路利用者の区分"],
   "Age groups": ["年龄组", "Kumpulan umur", "年齢層"],
+  "0-7": ["0–7 岁", "0–7 tahun", "0～7歳"],
+  "8-16": ["8–16 岁", "8–16 tahun", "8～16歳"],
+  "17-25": ["17–25 岁", "17–25 tahun", "17～25歳"],
+  "26-39": ["26–39 岁", "26–39 tahun", "26～39歳"],
+  "40-64": ["40–64 岁", "40–64 tahun", "40～64歳"],
+  "65+": ["65 岁以上", "65 tahun ke atas", "65歳以上"],
   "Annual trend": ["年度趋势", "Trend tahunan", "年間推移"],
   "n.p. means the value was not published to protect confidentiality; it does not mean zero.": [
     "n.p. 表示该数值未公布以保护隐私，并不表示为零。",
@@ -460,10 +502,106 @@ const languageCatalog = {
   "Road-user categories ·": ["道路使用者类别 · ", "Kategori pengguna jalan raya · ", "道路利用者の区分 · "],
   "Age groups ·": ["年龄组 · ", "Kumpulan umur · ", "年齢層 · "],
   "State heatmap ·": ["州热力图 · ", "Peta haba negeri · ", "州のヒートマップ · "],
+  "Rows are states and columns are years. Use the arrow keys to move through the grid; press Enter or Space to select a state.": [
+    "每行代表一个州或领地，每列代表一年。使用方向键在网格中移动，按 Enter 或空格键选择州或领地。",
+    "Setiap baris ialah negeri dan setiap lajur ialah tahun. Gunakan kekunci anak panah untuk bergerak dalam grid; tekan Enter atau Space untuk memilih negeri.",
+    "行は州・準州、列は年を示します。矢印キーでグリッドを移動し、Enter または Space で州・準州を選択します。"
+  ],
+  "Show heatmap values as a table": ["以表格查看热力图数值", "Paparkan nilai peta haba sebagai jadual", "ヒートマップの値を表で表示"],
+  "State and Territory values": ["州和领地数据", "Nilai Negeri dan Wilayah", "州・準州の値"],
+  "State / Year": ["州 / 年", "Negeri / Tahun", "州 / 年"],
+  "Press Enter to select this state.": ["按 Enter 键选择此州或领地。", "Tekan Enter untuk memilih negeri ini.", "Enter キーでこの州・準州を選択します。"],
+  "Use arrow keys to move through years and states. Enter or Space selects a state.": [
+    "使用方向键在年份和州之间移动。按 Enter 或空格键选择州。",
+    "Gunakan kekunci anak panah untuk bergerak antara tahun dan negeri. Enter atau Space memilih negeri.",
+    "矢印キーで年と州を移動します。Enter または Space で州を選択します。"
+  ],
+  "Select state ": ["选择州或领地 ", "Pilih negeri ", "州・準州を選択 "],
+  "Explore the dashboard one storyline at a time": [
+    "逐个故事线探索仪表板",
+    "Terokai papan pemuka mengikut cerita",
+    "ストーリーごとにダッシュボードを見る"
+  ],
+  "Each page keeps related charts together, with its own data table and CSV download.": [
+    "每个页面将相关图表放在一起，并提供对应的数据表和 CSV 下载。",
+    "Setiap halaman mengumpulkan carta yang berkaitan, berserta jadual data dan muat turun CSV tersendiri.",
+    "各ページに関連するグラフをまとめ、専用のデータ表とCSVダウンロードを用意しています。"
+  ],
+  "Open storyline": ["打开故事线", "Buka cerita", "ストーリーを開く"],
+  "Back to dashboard overview": ["返回仪表板概览", "Kembali ke ringkasan papan pemuka", "ダッシュボード概要に戻る"],
+  "Storyline pages": ["故事线页面", "Halaman cerita", "ストーリーページ"],
+  "National hospitalisation trends from 2011 to 2021.": [
+    "2011 至 2021 年全国道路事故住院趋势。",
+    "Trend kemasukan hospital nasional akibat kemalangan jalan raya dari 2011 hingga 2021.",
+    "2011年から2021年までの全国道路事故入院の傾向です。"
+  ],
+  "Compare road-user groups and age groups using admissions and bed days.": [
+    "比较不同道路使用者和年龄组的住院人数与床日。",
+    "Bandingkan kumpulan pengguna jalan raya dan kumpulan umur berdasarkan kemasukan hospital dan hari katil.",
+    "入院数と病床日数を使って、道路利用者や年齢層を比較します。"
+  ],
+  "Explore state and territory patterns across years and compare the selected state trajectory.": [
+    "查看各州和领地历年的趋势，并比较所选辖区的变化。",
+    "Terokai corak negeri dan wilayah mengikut tahun serta bandingkan trend negeri yang dipilih.",
+    "州・準州ごとの年次傾向を確認し、選択した地域の推移を比較します。"
+  ],
+  "Review First Nations trends and breakdowns, including privacy-suppressed values.": [
+    "查看原住民相关趋势和细分数据，包括因隐私保护而隐藏的数值。",
+    "Teliti trend dan pecahan Orang Asal, termasuk nilai yang disembunyikan demi privasi.",
+    "プライバシー保護のため非公開となった値を含め、先住民に関する傾向と内訳を確認します。"
+  ],
   "The dashboard is divided into four sections: national trends, road-user and age-group patterns, state and territory patterns, and First Nations patterns. Each section answers a different question about the 2011–2021 data.": [
     "仪表板分为四个部分：全国趋势、道路使用者与年龄组、州和领地趋势，以及原住民趋势。每个部分都从不同角度分析 2011–2021 年数据。",
     "Papan pemuka dibahagikan kepada empat bahagian: trend nasional, corak pengguna jalan raya dan kumpulan umur, corak negeri dan wilayah serta corak Orang Asal. Setiap bahagian menjawab soalan yang berbeza tentang data 2011–2021.",
     "ダッシュボードは、全国的な傾向、道路利用者・年齢層、州・準州、先住民の4つのセクションに分かれています。それぞれ2011～2021年のデータを異なる視点から扱います。"
+  ]
+};
+
+const richLanguageCatalog = {
+  "How did hospitalisations from road crashes in Australia change between 2011 and 2021?": [
+    "2011 至 2021 年间，澳大利亚道路事故住院人数如何变化？",
+    "Bagaimanakah kemasukan hospital akibat kemalangan jalan raya di Australia berubah dari 2011 hingga 2021?",
+    "2011年から2021年にかけて、オーストラリアの道路事故による入院はどのように変化しましたか？"
+  ],
+  "Which road-user categories and age groups accounted for more hospitalisations, and how did bed use compare?": [
+    "哪些道路使用者类别和年龄组的住院人数较多？住院床日有何差异？",
+    "Kategori pengguna jalan raya dan kumpulan umur manakah mencatat lebih banyak kemasukan hospital, dan bagaimanakah penggunaan katil berbeza?",
+    "道路利用者の区分や年齢層のうち、入院数が多いのはどこでしょうか。入院病床日数にはどのような違いがありますか？"
+  ],
+  "What were the hospitalisation patterns among Aboriginal and Torres Strait Islander people across years, modes, and ages?": [
+    "澳大利亚原住民和托雷斯海峡岛民在不同年份、出行方式和年龄组的住院情况如何？",
+    "Apakah corak kemasukan hospital dalam kalangan Orang Asal dan Penduduk Pulau Selat Torres mengikut tahun, mod perjalanan dan umur?",
+    "アボリジナルおよびトレス海峡諸島民の入院状況は、年・移動手段・年齢によってどのように異なりましたか？"
+  ],
+  "For the heatmap, use all four arrow keys to move by year and state. Elsewhere, use Left/Right Arrow to move through chart data; line-chart points follow year order. Press Enter or Space on a heatmap cell to select a state.": [
+    "在热力图中，使用四个方向键按年份和州移动。在其他图表中，使用<strong>向左/向右箭头</strong>浏览数据；折线图数据点按年份排列。按<strong>Enter</strong>或<strong>空格键</strong>选择热力图中的州。",
+    "Dalam peta haba, gunakan keempat-empat kekunci anak panah untuk bergerak mengikut tahun dan negeri. Dalam carta lain, gunakan <strong>anak panah kiri/kanan</strong> untuk menelusuri data; titik carta garis mengikut turutan tahun. Tekan <strong>Enter</strong> atau <strong>Space</strong> pada sel peta haba untuk memilih negeri.",
+    "ヒートマップでは上下左右の矢印キーで年と州を移動します。他のグラフでは<strong>左右の矢印キー</strong>でデータを移動し、折れ線グラフの点は年順に並びます。ヒートマップのセルで<strong>Enter</strong>または<strong>Space</strong>を押すと州を選択できます。"
+  ],
+  "Recorded hospital admissions rose from 1,167 in 2011 to 2,059 in 2021.": [
+    "记录的住院人数从 2011 年的 1,167 人增至 2021 年的 2,059 人。",
+    "Kemasukan hospital yang direkodkan meningkat daripada 1,167 pada 2011 kepada 2,059 pada 2021.",
+    "記録された入院数は、2011年の1,167人から2021年の2,059人に増加しました。"
+  ],
+  "To protect patient confidentiality under AIHW protocols, small counts (< 5 cases) are marked n.p. and rendered as diagonal hatched slots rather than zero.": [
+    "根据 AIHW 保密规定，为保护患者隐私，少于 5 例的数值标记为 <strong>n.p.</strong>，并以斜线图案显示，而不是记为零。",
+    "Bagi melindungi kerahsiaan pesakit mengikut protokol AIHW, bilangan kecil (kurang daripada 5 kes) ditandakan sebagai <strong>n.p.</strong> dan dipaparkan dengan corak serong, bukannya sifar.",
+    "AIHWの規定に基づき、患者のプライバシー保護のため、5件未満の少数値は<strong>n.p.</strong>と表示し、ゼロではなく斜線パターンで示します。"
+  ],
+  "Hospitalisations are the number of hospital admissions in the dataset. Bed days count inpatient days associated with those admissions. They describe different things: a longer stay can contribute more bed days without adding another admission.": [
+    "<strong>住院人数</strong>是数据集中的入院次数。<strong>床日</strong>统计这些住院对应的住院天数。两者含义不同：住院时间延长会增加床日，但不会增加入院次数。",
+    "<strong>Kemasukan hospital</strong> ialah bilangan kemasukan dalam set data. <strong>Hari katil</strong> mengira hari pesakit berada di hospital. Kedua-duanya berbeza: tempoh rawatan lebih lama menambah hari katil tanpa menambah kemasukan baharu.",
+    "<strong>入院数</strong>はデータセット内の入院件数です。<strong>病床日数</strong>は入院に伴う入院日数です。長期入院は病床日数を増やしますが、入院件数が増えるわけではありません。"
+  ],
+  "Suppressed values: “n.p.” means a value is not published to protect privacy. It is not zero; hatched marks identify these values in the First Nations charts.": [
+    "<strong>隐藏数据：</strong>“n.p.”表示为保护隐私而未公布该数值，并非零；原住民图表中以斜线标记此类数据。",
+    "<strong>Nilai disembunyikan:</strong> “n.p.” bermaksud nilai tidak diterbitkan demi privasi. Nilainya bukan sifar; tanda berjalur menunjukkan nilai ini dalam carta Orang Asal.",
+    "<strong>非公開値：</strong>「n.p.」はプライバシー保護のため値が公表されていないことを示し、ゼロではありません。先住民のグラフでは斜線で示します。"
+  ],
+  "Charts show different measures, years, and breakdowns. A national total, a selected state, and a road-user or age-group category do not have the same scope. Some First Nations breakdown values are suppressed as n.p., so a visible subtotal may not equal a chart’s overall total.": [
+    "图表使用不同指标、年份和细分范围。全国总数、所选州以及道路使用者或年龄组类别的范围并不相同。部分原住民细分数值以 <strong>n.p.</strong> 隐藏，因此可见小计可能不等于图表总数。",
+    "Carta menggunakan ukuran, tahun dan pecahan yang berbeza. Jumlah nasional, negeri terpilih dan kategori pengguna jalan raya atau umur mempunyai skop yang berlainan. Sesetengah nilai pecahan Orang Asal disembunyikan sebagai <strong>n.p.</strong>, maka subtotal yang kelihatan mungkin tidak sama dengan jumlah keseluruhan carta.",
+    "グラフによって指標、年、内訳が異なります。全国合計、選択した州、道路利用者や年齢層の区分は対象範囲が異なります。先住民の一部の内訳は<strong>n.p.</strong>として非公開のため、表示された小計がグラフ全体の合計と一致しない場合があります。"
   ]
 };
 
@@ -519,7 +657,6 @@ function translateTextNode(node, language) {
 
 function translateElementText(element, language) {
   if (["SCRIPT", "STYLE", "NOSCRIPT"].includes(element.tagName)) return false;
-  if ([...element.children].length) return false;
 
   let state = elementSources.get(element);
   const currentText = normalized(element.textContent);
@@ -529,19 +666,28 @@ function translateElementText(element, language) {
       state = { text: currentText, html: element.innerHTML, rendered: currentText };
       elementSources.set(element, state);
     }
-  } else if (languageCatalog[currentText]) {
+  } else if (richLanguageCatalog[currentText] ||
+      (!element.children.length && languageCatalog[currentText])) {
     state = { text: currentText, html: element.innerHTML, rendered: currentText };
     elementSources.set(element, state);
   } else {
     return false;
   }
 
-  const translated = translatePhrase(state.text, language);
-  state.rendered = translated;
+  const translated = language === "en"
+    ? state.text
+    : richLanguageCatalog[state.text]?.[languageOptions[language].index] || translatePhrase(state.text, language);
   if (language === "en") {
     if (element.innerHTML !== state.html) element.innerHTML = state.html;
+    state.rendered = state.text;
+  } else if (richLanguageCatalog[state.text]) {
+    if (element.innerHTML !== translated) element.innerHTML = translated;
+    state.rendered = normalized(element.textContent);
   } else if (element.textContent !== translated) {
     element.textContent = translated;
+    state.rendered = translated;
+  } else {
+    state.rendered = translated;
   }
   return true;
 }
@@ -584,8 +730,10 @@ function initializeLanguageSelector() {
 
   let language = "en";
   try {
+    const urlLanguage = new URLSearchParams(window.location.search).get("lang");
     const savedLanguage = localStorage.getItem("crashmetrics-language");
-    if (savedLanguage && Object.hasOwn(languageOptions, savedLanguage)) language = savedLanguage;
+    if (urlLanguage && Object.hasOwn(languageOptions, urlLanguage)) language = urlLanguage;
+    else if (savedLanguage && Object.hasOwn(languageOptions, savedLanguage)) language = savedLanguage;
   } catch (error) {
     console.warn("Unable to read saved language preference:", error);
   }
@@ -597,6 +745,10 @@ function initializeLanguageSelector() {
     document.documentElement.dataset.language = language;
     document.title = translatePhrase(sourceDocumentTitle, language);
     translateSubtree(document.documentElement, language);
+    updateInternalLanguageLinks(language);
+    window.dispatchEvent(new CustomEvent("crashmetrics:languagechange", {
+      detail: { language }
+    }));
   };
 
   applyLanguage(language);
@@ -627,6 +779,19 @@ function initializeLanguageSelector() {
     childList: true,
     characterData: true,
     subtree: true
+  });
+}
+
+function updateInternalLanguageLinks(language) {
+  const pageUrl = new URL(window.location.href);
+  pageUrl.searchParams.set("lang", language);
+  window.history.replaceState(null, "", `${pageUrl.pathname}${pageUrl.search}${pageUrl.hash}`);
+
+  document.querySelectorAll("a[href]").forEach(link => {
+    const linkUrl = new URL(link.href, window.location.href);
+    if (linkUrl.origin !== window.location.origin) return;
+    linkUrl.searchParams.set("lang", language);
+    link.href = `${linkUrl.pathname}${linkUrl.search}${linkUrl.hash}`;
   });
 }
 

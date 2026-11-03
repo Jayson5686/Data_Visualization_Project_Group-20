@@ -36,7 +36,7 @@ function initializePageMagnification() {
   const magnificationSelector = document.getElementById('page-magnification');
   if (!magnificationSelector) return;
 
-  const magnifications = ['fit', '75', '90', '100', '110'];
+  const magnifications = ['fit', '75', '90', '100', '110', '120'];
   let magnification = magnifications[0];
   try {
     const savedMagnification = localStorage.getItem('crashmetrics-magnification');
