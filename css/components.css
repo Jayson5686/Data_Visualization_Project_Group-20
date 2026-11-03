@@ -149,7 +149,8 @@
 }
 
 .sub-card-subtitle {
-  font-size: 0.78rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
   color: var(--ink-muted);
 }
 
@@ -273,8 +274,9 @@
 }
 
 .dark-pane-subtitle {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .dark-pill-group {
@@ -293,6 +295,212 @@
 
 .heatmap-stage {
   margin: 0.5rem 0;
+}
+
+.storyline-index-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.storyline-index-intro {
+  max-width: 62rem;
+}
+
+.storyline-index-intro .bento-title {
+  margin: 0.5rem 0;
+}
+
+.storyline-index-intro > p,
+.storyline-index-card > p {
+  color: var(--ink-secondary);
+  line-height: 1.65;
+}
+
+.storyline-index-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.storyline-index-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1.35rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-inner);
+  background: var(--bg-shell);
+}
+
+.storyline-index-card h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.storyline-index-card h2 a {
+  color: var(--ink-primary);
+  text-decoration: none;
+}
+
+.storyline-index-card h2 a:hover,
+.storyline-index-card h2 a:focus-visible {
+  color: var(--accent-amber-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.storyline-index-card > p {
+  flex: 1;
+  margin: 0;
+}
+
+.storyline-index-card .utility-btn {
+  text-decoration: none;
+}
+
+.storyline-page-workspace {
+  gap: 1rem;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 10001;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.75rem 1rem;
+  transform: translateY(calc(-100% - 1rem));
+  border-radius: 0.5rem;
+  background: var(--bg-card-white);
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.story-guide {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-amber);
+  border-radius: 0.75rem;
+  background: var(--bg-card-white);
+  color: var(--ink-primary);
+}
+
+.story-guide h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.story-guide p {
+  max-width: 78ch;
+  margin: 0;
+  color: var(--ink-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.storyline-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.storyline-pagination a {
+  color: var(--ink-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.storyline-pagination a:hover,
+.storyline-pagination a:focus-visible {
+  color: var(--accent-amber-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.heatmap-instructions {
+  margin: 0.25rem 0 0.6rem;
+  max-width: 62ch;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.heatmap-values-details {
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.82rem;
+}
+
+.heatmap-values-details summary {
+  width: fit-content;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.heatmap-values-details summary:focus-visible,
+.heatmap-table-scroll:focus-visible,
+.heatmap-state-select:focus-visible {
+  outline: 3px solid var(--accent-amber);
+  outline-offset: 3px;
+}
+
+.heatmap-table-scroll {
+  max-width: 100%;
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.6rem;
+}
+
+.heatmap-values-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.heatmap-values-table caption {
+  padding: 0.65rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.heatmap-values-table th,
+.heatmap-values-table td {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.heatmap-values-table thead th {
+  color: #FFFFFF;
+}
+
+.heatmap-values-table tbody th {
+  text-align: left;
+}
+
+.heatmap-state-select {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #FFFFFF;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
 }
 
 .dark-pane-footer {
@@ -1988,6 +2196,15 @@ html[data-language="ms"] .sub-card-title {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .about-step-list li,
   .about-team-member,
   .about-data-faq-item {
@@ -2016,6 +2233,12 @@ html[data-language="ms"] .sub-card-title {
   background: #000000;
   border-color: #FFFFFF;
   color-scheme: dark;
+}
+
+@media (max-width: 700px) {
+  .storyline-index-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 :root[data-theme="high-contrast"] .tooltip-badge {
