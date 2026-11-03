@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="National hospitalisation trends from 2011 to 2021.">
+  <title>01 National &mdash; CrashMetrics Australia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/language.js" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="preloader" role="status" aria-live="polite">
+    <div class="preloader-frame">
+      <div class="preloader-top-progress" id="preloader-bar"></div>
+      <div class="preloader-bottom-row">
+        <div class="preloader-counter" id="preloader-counter">0%</div>
+        <div class="preloader-label">Loading Verified AIHW National Morbidity Records (2011&ndash;2021)</div>
+      </div>
+    </div>
+  </div>
+  <div id="global-tooltip" role="tooltip" aria-hidden="true"></div>
+  <div class="page-shell info-page-shell">
+    <header class="info-page-nav">
+      <a href="index.html?dashboard=1#top" class="brand-mark info-brand-mark">
+        <span class="brand-dot-cluster" aria-hidden="true"><span class="dot-amber"></span><span class="dot-amber-sm"></span></span>
+        <span class="brand-name">CrashMetrics</span><span class="brand-tag">AIHW 2011&ndash;21</span>
+      </a>
+      <nav class="info-page-links" aria-label="Primary Navigation">
+        <a href="about.html">About</a>
+        <a href="about-data.html">About Data</a>
+        <a href="index.html?dashboard=1">Dashboard</a>
+        <a href="national.html" aria-current="page">01 National</a>
+        <a href="users-age.html">02 Users &amp; Age</a>
+        <a href="states.html">03 States</a>
+        <a href="first-nations.html">04 First Nations</a>
+        <div class="nav-accessibility-controls">
+          <span class="sr-only" id="accessibility-controls-help">Use Left and Right Arrow keys to move through navigation links. Choose System, Light, Dark, High contrast, or Color-blind-friendly from the theme dropdown. Tab and Shift+Tab are also available.</span>
+          <label class="theme-control language-control">
+            <span>Language:</span>
+            <select id="language-selector" class="theme-control-select" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="zh-CN">简体中文</option>
+              <option value="ms">Bahasa Melayu</option>
+              <option value="ja">日本語</option>
+            </select>
+          </label>
+          <label class="theme-control">
+            <span>Theme:</span>
+            <select id="theme-selector" class="theme-control-select" aria-describedby="accessibility-controls-help">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="high-contrast">High contrast</option>
+              <option value="color-blind">Color-blind-friendly</option>
+            </select>
+          </label>
+          <label class="page-magnification-control">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="10.8" cy="10.8" r="6.3"></circle>
+              <path d="m15.4 15.4 5 5"></path>
+            </svg>
+            <span class="sr-only">Page magnification</span>
+            <select id="page-magnification" aria-describedby="accessibility-controls-help">
+              <option value="fit">Fit</option>
+              <option value="75">75%</option>
+              <option value="90">90%</option>
+              <option value="100">100%</option>
+              <option value="110">110%</option>
+              <option value="120">120%</option>
+            </select>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main id="main-content" class="bento-workspace storyline-page-workspace" tabindex="-1">
+      <nav class="storyline-pagination" aria-label="Storyline pages"><a href="index.html?dashboard=1">Back to dashboard overview</a><a href="users-age.html">02 Users &amp; Age &rarr;</a></nav>
+      <section id="storyline1" class="storyline-block" aria-labelledby="s1-title">
+        <div class="bento-shell">
+          
+          <!-- Section Top Bar -->
+          <div class="bento-header">
+            <div class="bento-title-group">
+              <div class="eyebrow-row">
+                <span class="section-num-pill">01</span>
+                <span class="section-eyebrow">National Hospitalisation Trends · 2011–2021</span>
+              </div>
+              <h1 id="s1-title" class="bento-title">
+                How did hospitalisations from road crashes in Australia change<em> between 2011 and 2021?</em>
+              </h1>
+            </div>
+
+            <div class="bento-controls">
+              <div class="clean-pill-group" role="group" aria-label="Storyline 1 Measure Selector">
+                <button class="clean-pill-btn active" data-measure="Hospitalisations" id="s1-btn-hosp" aria-pressed="true">
+                  Hospitalisations
+                </button>
+                <button class="clean-pill-btn" data-measure="BedDays" id="s1-btn-beds" aria-pressed="false">
+                  Hospital Bed Days
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="story-guide" id="s1-story-guide" aria-label="Story guide">
+            <h2>Story guide</h2>
+            <p>Follow the national trend from 2011 to 2021, then compare admissions with bed days. Reporting changes and the 2020 pandemic period provide context for interpreting changes over time.</p>
+          </aside>
+
+          <!-- Nested Overview KPI Cards (Exact dashboarddesign.webp "Overview" inset cards pattern) -->
+          <div class="overview-inset-tray">
+            <div class="inset-stat-card active-inset" id="s1-card-hosp" role="button" tabindex="0" aria-pressed="true" aria-label="Select Hospitalisations Measure">
+              <div class="inset-card-top">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span>Admitted Patients (2011–2021)</span>
+              </div>
+              <div class="inset-card-main">
+                <span class="inset-big-num">410,884</span>
+                <div class="inset-badge-stack">
+                  <span class="semantic-pill pill-coral">↑ 17.1%</span>
+                  <span class="inset-sublabel">to 2019 peak (39,866)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-stat-card" id="s1-card-beds" role="button" tabindex="0" aria-pressed="false" aria-label="Select Hospital Bed Days Measure">
+              <div class="inset-card-top">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Occupied Inpatient Bed Days</span>
+              </div>
+              <div class="inset-card-main">
+                <span class="inset-big-num">2,007,387</span>
+                <div class="inset-badge-stack">
+                  <span class="semantic-pill pill-green">4.89 days</span>
+                  <span class="inset-sublabel">average length of stay</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="inset-narrative-box">
+              <div class="narrative-headline">3 Comparability Breaks Annotated</div>
+              <p class="narrative-copy">
+                Hover over the timeline markers to inspect the <strong>2012 Victoria catchment change</strong>, <strong>2017 NSW coding break</strong>, and <strong>2020 COVID-19 lockdown drop (-4.8%)</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Chart Viewport -->
+          <div class="chart-stage" id="chart-storyline1" role="region" aria-label="National Hospitalisation Line Chart" aria-describedby="s1-story-guide"></div>
+          <div class="section-actions">
+            <button type="button" class="utility-btn" data-view-data="storyline1" aria-controls="data-table-storyline1" aria-expanded="false">View Data</button>
+            <button type="button" class="utility-btn" data-download-csv="storyline1" title="Download all national trend data as a CSV file">Download CSV</button>
+            <button type="button" class="utility-btn" data-reset-view="storyline1">Reset View</button>
+          </div>
+          <div class="data-table-panel" id="data-table-storyline1" hidden></div>
+
+        </div>
+      </section>
+      <nav class="storyline-pagination" aria-label="Storyline pages"><a href="index.html?dashboard=1">Back to dashboard overview</a><a href="users-age.html">02 Users &amp; Age &rarr;</a></nav>
+    </main>
+    <footer class="editorial-footer info-page-footer">
+      <div class="footer-brand-col"><span class="footer-logo">CrashMetrics Australia</span><p class="footer-meta">Source: Australian Institute of Health and Welfare (AIHW) National Hospital Morbidity Database (NHMD).</p></div>
+      <nav class="footer-nav-col" aria-label="Footer Navigation">
+        <a href="about.html">About</a><a href="about-data.html">About Data</a><a href="index.html?dashboard=1">Dashboard</a>
+        <a href="national.html" aria-current="page">01 National</a><a href="users-age.html">02 Users &amp; Age</a><a href="states.html">03 States</a><a href="first-nations.html">04 First Nations</a>
+      </nav>
+    </footer>
+  </div>
+  <dialog class="help-dialog" id="help-dialog" aria-labelledby="help-title">
+    <div class="help-dialog-header">
+      <h2 id="help-title">How to Use CrashMetrics</h2>
+      <button type="button" class="utility-btn" id="help-close" aria-label="Close help">Close</button>
+    </div>
+    <ul>
+      <li>Use <strong>Left/Right Arrow</strong> to move through navigation links or chart data. Use <strong>Tab</strong> and <strong>Shift+Tab</strong> to move through all controls; use arrow keys to adjust a focused year slider.</li>
+      <li>Use the playback button to animate years; select it again to pause.</li>
+      <li>Choose a state from the dropdown or select a heatmap cell to inspect its trajectory.</li>
+      <li>For the heatmap, use all four arrow keys to move by year and state. Elsewhere, use <strong>Left/Right Arrow</strong> to move through chart data; line-chart points follow year order. Press <strong>Enter</strong> or <strong>Space</strong> on a heatmap cell to select a state.</li>
+      <li>Focus or point to chart marks for details. Press <strong>Esc</strong> to dismiss a tooltip.</li>
+      <li>Hatched <strong>n.p.</strong> values are not published to protect privacy; they are not zero.</li>
+    </ul>
+    <button type="button" class="utility-btn help-tour-start" id="help-tour-start">Still don't get it? Start the step-by-step tour</button>
+    <section class="help-tour" id="help-tour" aria-labelledby="help-tour-title" hidden>
+      <div class="help-tour-progress" id="help-tour-progress" role="status" aria-live="polite"></div>
+      <h3 id="help-tour-title" tabindex="-1"></h3>
+      <p id="help-tour-copy"></p>
+      <a class="utility-btn help-tour-link" id="help-tour-link"></a>
+      <div class="help-tour-controls">
+        <button type="button" class="utility-btn" id="help-tour-back">Back</button>
+        <button type="button" class="utility-btn" id="help-tour-next">Next</button>
+      </div>
+      <button type="button" class="help-tour-return" id="help-tour-return">Back to quick tips</button>
+    </section>
+  </dialog>
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Soft Warm Amber Gradient for Storyline 1 & State Line -->
+      <linearGradient id="area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="var(--accent-amber)" stop-opacity="0.28"/>
+        <stop offset="85%" stop-color="var(--accent-amber)" stop-opacity="0.03"/>
+        <stop offset="100%" stop-color="var(--accent-amber)" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- Soft Emerald Gradient for Active Vertical Bars (dashboarddesign.webp style) -->
+      <linearGradient id="emerald-bar-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="var(--accent-emerald)"/>
+        <stop offset="100%" stop-color="var(--accent-emerald)" stop-opacity="0.75"/>
+      </linearGradient>
+
+      <!-- Diagonal Hatch Pattern for Suppressed n.p. Records -->
+      <pattern id="diagonal-hatch-pattern" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <rect class="np-hatch-background" width="8" height="8" fill="#FFF1F0"/>
+        <line class="np-hatch-line" x1="0" y1="0" x2="0" y2="8" stroke="#F43F5E" stroke-width="2" stroke-opacity="0.65" />
+      </pattern>
+    </defs>
+  </svg>
+  <script src="js/storyline1_national.js"></script>
+  <script src="js/storyline2_groups.js"></script>
+  <script src="js/storyline3_states.js"></script>
+  <script src="js/storyline4_firstnations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
