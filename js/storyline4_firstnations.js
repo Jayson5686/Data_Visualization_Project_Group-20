@@ -14,9 +14,18 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
   containerUsers.innerHTML = '';
   containerAge.innerHTML = '';
 
-  let activeYear = window.AppState.activeYearS4 || 2021;
+  const firstYear = 2011;
+  const lastYear = 2021;
+  let activeYear = window.AppState.activeYearS4 || firstYear;
   let isPlaying = false;
   let playInterval = null;
+
+  function localized(value) {
+    const language = document.documentElement.dataset.language || 'en';
+    return window.translateCrashMetrics
+      ? window.translateCrashMetrics(value, language)
+      : value;
+  }
 
   // 1. Top Chart: Annual Longitudinal Trend Line (2011–2021)
   const marginTrend = { top: 20, right: 30, bottom: 36, left: 56 };
@@ -98,16 +107,16 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
     const growthFrom2011 = (((d.Hospitalisations - fnAnnual[0].Hospitalisations) / fnAnnual[0].Hospitalisations) * 100).toFixed(1);
     window.showTooltip(event, `
         <div class="tooltip-header">
-          <span class="tooltip-tag">First Nations Annual</span>
+          <span class="tooltip-tag">${localized('First Nations Annual')}</span>
           <span class="tooltip-badge">${d.Year}</span>
         </div>
-        <div class="tooltip-title">Hospital Admissions</div>
+        <div class="tooltip-title">${localized('Hospital Admissions')}</div>
         <div class="tooltip-metric-row">
           <span class="tooltip-value">${window.formatNumber(d.Hospitalisations)}</span>
-          <span class="delta-pill up">+${growthFrom2011}% vs 2011</span>
+          <span class="delta-pill up">+${growthFrom2011}% ${localized('vs 2011')}</span>
         </div>
         <div class="tooltip-extra">
-          Click node to filter ${d.Year} road-user and age breakdowns below.
+          ${localized('Click this point to filter the road-user and age breakdowns below.')}
         </div>
       `);
   }
@@ -171,7 +180,7 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
   const yAgeAxis = gAge.append('g').attr('class', 'axis axis-y');
 
   function updateBottomCharts() {
-    const t = d3.transition().duration(550).ease(d3.easeCubicOut);
+    const t = d3.transition().duration(window.chartMotionDuration(550)).ease(d3.easeCubicOut);
 
     // Highlight active year node on top trend line
     trendNodes
@@ -192,7 +201,7 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
     yUsersScale.domain(currentUsers.map(d => d.RoadUser));
 
     xUsersAxis.transition(t).call(d3.axisBottom(xUsersScale).ticks(5).tickFormat(d3.format('~s')));
-    yUsersAxis.transition(t).call(d3.axisLeft(yUsersScale));
+    yUsersAxis.transition(t).call(d3.axisLeft(yUsersScale).tickFormat(value => localized(value)));
 
     usersGrid.transition(t).call(
       d3.axisBottom(xUsersScale).ticks(5).tickSize(heightUsers).tickFormat('')
@@ -251,29 +260,29 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
         if (d.Hospitalisations === 'n.p.') {
           window.showTooltip(event, `
             <div class="tooltip-header">
-              <span class="tooltip-tag" style="color: var(--accent-coral);">Suppressed Data ('n.p.')</span>
+              <span class="tooltip-tag" style="color: var(--accent-coral);">${localized("Suppressed Data ('n.p.')")}</span>
               <span class="tooltip-badge">${activeYear}</span>
             </div>
-            <div class="tooltip-title">${d.RoadUser}</div>
+            <div class="tooltip-title">${localized(d.RoadUser)}</div>
             <div class="tooltip-extra">
-              <strong>Data Not Published (n.p.)</strong><br>
-              Small cell counts (&lt; 5 hospitalisations) are suppressed under AIHW privacy rules.
+              <strong>${localized('Data Not Published (n.p.)')}</strong><br>
+              ${localized('Small cell counts (< 5 hospitalisations) are suppressed under AIHW privacy rules.')}
             </div>
           `);
         } else {
           window.showTooltip(event, `
             <div class="tooltip-header">
-              <span class="tooltip-tag">First Nations Mode</span>
+              <span class="tooltip-tag">${localized('First Nations Mode')}</span>
               <span class="tooltip-badge">${activeYear}</span>
             </div>
-            <div class="tooltip-title">${d.RoadUser}</div>
+            <div class="tooltip-title">${localized(d.RoadUser)}</div>
             <div class="tooltip-metric-row">
               <span class="tooltip-value">${window.formatNumber(d.Hospitalisations)}</span>
-              <span class="tooltip-subvalue">Admissions</span>
+              <span class="tooltip-subvalue">${localized('Admissions')}</span>
             </div>
             <div class="tooltip-extra">
-              Bed Days: <strong>${d.BedDays === 'n.p.' ? 'n.p.' : window.formatNumber(d.BedDays)}</strong><br>
-              ${d.BedDays !== 'n.p.' ? `Avg Stay: <strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} days</strong>` : ''}
+              ${localized('Bed Days:')}<strong>${d.BedDays === 'n.p.' ? 'n.p.' : window.formatNumber(d.BedDays)}</strong><br>
+              ${d.BedDays !== 'n.p.' ? `${localized('Avg Stay:')}<strong>${(d.BedDays / d.Hospitalisations).toFixed(1)} ${localized('days')}</strong>` : ''}
             </div>
           `);
         }
@@ -303,7 +312,7 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
 
     yAgeScale.domain([0, maxNumericAge * 1.16]);
 
-    xAgeAxis.transition(t).call(d3.axisBottom(xAgeScale));
+    xAgeAxis.transition(t).call(d3.axisBottom(xAgeScale).tickFormat(value => localized(value)));
     yAgeAxis.transition(t).call(d3.axisLeft(yAgeScale).ticks(5).tickFormat(d3.format('~s')));
 
     ageGrid.transition(t).call(
@@ -363,28 +372,28 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
         if (d.Hospitalisations === 'n.p.') {
           window.showTooltip(event, `
             <div class="tooltip-header">
-              <span class="tooltip-tag" style="color: var(--accent-coral);">Suppressed Data ('n.p.')</span>
+              <span class="tooltip-tag" style="color: var(--accent-coral);">${localized("Suppressed Data ('n.p.')")}</span>
               <span class="tooltip-badge">${activeYear}</span>
             </div>
-            <div class="tooltip-title">Age Group: ${d.AgeGroup}</div>
+            <div class="tooltip-title">${localized('Age Group:')}${localized(d.AgeGroup)}</div>
             <div class="tooltip-extra">
-              Data suppressed for privacy protection (cell count &lt; 5).
+              ${localized('Data suppressed for privacy protection (cell count < 5).')}
             </div>
           `);
         } else {
           window.showTooltip(event, `
             <div class="tooltip-header">
-              <span class="tooltip-tag">First Nations Age Cohort</span>
+              <span class="tooltip-tag">${localized('First Nations Age Cohort')}</span>
               <span class="tooltip-badge">${activeYear}</span>
             </div>
-            <div class="tooltip-title">Age Bracket: ${d.AgeGroup} ${d.AgeGroup === '65+' ? '(Consolidated)' : ''}</div>
+            <div class="tooltip-title">${localized('Age Bracket:')}${localized(d.AgeGroup)} ${d.AgeGroup === '65+' ? localized('(Consolidated)') : ''}</div>
             <div class="tooltip-metric-row">
               <span class="tooltip-value">${window.formatNumber(d.Hospitalisations)}</span>
-              <span class="tooltip-subvalue">Admissions</span>
+              <span class="tooltip-subvalue">${localized('Admissions')}</span>
             </div>
             <div class="tooltip-extra">
-              Bed Days: <strong>${d.BedDays === 'n.p.' ? 'n.p.' : window.formatNumber(d.BedDays)}</strong><br>
-              ${d.AgeGroup === '65+' ? '<em>AIHW consolidates older cohorts into 65+ for First Nations reporting.</em>' : ''}
+              ${localized('Bed Days:')}<strong>${d.BedDays === 'n.p.' ? 'n.p.' : window.formatNumber(d.BedDays)}</strong><br>
+              ${d.AgeGroup === '65+' ? `<em>${localized('AIHW consolidates older cohorts into 65+ for First Nations reporting.')}</em>` : ''}
             </div>
           `);
         }
@@ -398,7 +407,7 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
   }
 
   function setStoryline4Year(year) {
-    activeYear = year;
+    activeYear = Math.max(firstYear, Math.min(lastYear, Math.round(year)));
     window.AppState.activeYearS4 = activeYear;
 
     const slider = document.getElementById('s4-year-slider');
@@ -420,41 +429,62 @@ function initStoryline4(fnAnnual, fnRoadUser, fnAge) {
     playInterval = null;
     if (playBtn) {
       playBtn.textContent = '▶';
-      playBtn.setAttribute('aria-label', 'Play timeline animation');
-      playBtn.title = 'Play timeline animation';
+      playBtn.setAttribute('aria-label', localized('Play timeline animation'));
+      playBtn.title = localized('Play timeline animation');
     }
   }
 
   if (slider && badge) {
     slider.addEventListener('input', (e) => {
+      stopPlayback();
       setStoryline4Year(+e.target.value);
     });
   }
 
+  function startPlayback() {
+    if (activeYear >= lastYear) setStoryline4Year(firstYear);
+    isPlaying = true;
+    if (playBtn) {
+      playBtn.textContent = '⏸';
+      playBtn.setAttribute('aria-label', localized('Pause timeline animation'));
+      playBtn.title = localized('Pause timeline animation');
+    }
+
+    playInterval = setInterval(() => {
+      if (activeYear >= lastYear) {
+        stopPlayback();
+        return;
+      }
+      setStoryline4Year(activeYear + 1);
+      if (activeYear >= lastYear) stopPlayback();
+    }, 1150);
+  }
+
   if (playBtn) {
     playBtn.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      playBtn.textContent = isPlaying ? '⏸' : '▶';
-      playBtn.setAttribute('aria-label', isPlaying ? 'Pause timeline animation' : 'Play timeline animation');
-      playBtn.title = isPlaying ? 'Pause timeline animation' : 'Play timeline animation';
-
       if (isPlaying) {
-        playInterval = setInterval(() => {
-          let nextYear = activeYear + 1;
-          if (nextYear > 2021) nextYear = 2011;
-          setStoryline4Year(nextYear);
-        }, 1150);
+        stopPlayback();
       } else {
-        clearInterval(playInterval);
-        playInterval = null;
+        startPlayback();
       }
     });
   }
 
   window.reset4 = () => {
     stopPlayback();
-    setStoryline4Year(2021);
+    setStoryline4Year(firstYear);
   };
 
+  window.addEventListener('crashmetrics:languagechange', () => {
+    updateBottomCharts();
+    const label = localized(isPlaying ? 'Pause timeline animation' : 'Play timeline animation');
+    if (playBtn) {
+      playBtn.setAttribute('aria-label', label);
+      playBtn.title = label;
+    }
+    window.hideTooltip();
+  });
+
   updateBottomCharts();
+  stopPlayback();
 }

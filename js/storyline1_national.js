@@ -97,7 +97,7 @@ function initStoryline1(data) {
 
   function updateChart(measure) {
     currentMeasure = measure;
-    const t = d3.transition().duration(600).ease(d3.easeCubicOut);
+    const t = d3.transition().duration(window.chartMotionDuration(600)).ease(d3.easeCubicOut);
 
     const yMax = d3.max(data, d => d[measure]);
     const yMin = d3.min(data, d => d[measure]) * 0.88;

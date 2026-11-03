@@ -7,11 +7,14 @@ window.AppState = {
   datasets: {},
   activeMeasureS1: 'Hospitalisations',
   activeMeasureS2: 'Hospitalisations',
-  activeYearS2: 2021,
+  activeYearS2: 2011,
   activeMeasureS3: 'Hospitalisations',
   activeStateS3: 'NSW',
-  activeYearS4: 2021
+  activeYearS4: 2011
 };
+
+window.chartMotionDuration = duration =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : duration;
 
 const tooltipEl = document.getElementById('global-tooltip');
 
@@ -268,7 +271,7 @@ window.refreshChartTooltip = chartRoot => {
     const metric = datum.Hospitalisations === 'n.p.' ? 'n.p.' :
       datum.Hospitalisations !== undefined ? `${window.formatNumber(datum.Hospitalisations)} admissions` : '';
     const label = [category, datum.Year, metric].filter(value => value !== '').join(', ');
-    if (label) mark.setAttribute('aria-label', `Chart data: ${label}`);
+    if (label && !mark.matches('.heatmap-cell')) mark.setAttribute('aria-label', `Chart data: ${label}`);
   }
 
   const rect = mark.getBoundingClientRect();
@@ -289,7 +292,11 @@ function initializeAccessibleChartMarks() {
   };
   const prepareMark = mark => {
     if (mark.matches('.chart-bar') && mark.parentElement.matches('.user-bar-item, .age-bar-item')) return;
-    mark.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight');
+    if (mark.matches('.heatmap-cell')) {
+      mark.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown Enter Space Home End Control+Home Control+End');
+    } else {
+      mark.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight');
+    }
     if (mark.hasAttribute('tabindex')) return;
     mark.setAttribute('tabindex', '0');
     mark.setAttribute('role', 'button');
@@ -428,37 +435,37 @@ function initializeGlobalControls() {
         title: '1. Choose a story',
         copy: 'The dashboard is divided into four sections: national trends, road-user and age-group patterns, state and territory patterns, and First Nations patterns. Each section answers a different question about the 2011–2021 data.',
         link: 'Go to National Trends',
-        href: '#storyline1'
+        href: 'national.html#storyline1'
       },
       {
         title: '2. Change the year',
         copy: 'In the demographic and First Nations sections, use the year slider to move to a particular year. Use the play button to preview the years in sequence; select it again to pause.',
         link: 'Go to Users & Age',
-        href: '#storyline2'
+        href: 'users-age.html#storyline2'
       },
       {
         title: '3. Explore chart details',
         copy: 'Hover over or focus a chart mark to see its details. On a focused mark, Left/Right Arrow moves through the chart; press Enter to select a mark when it offers an interaction.',
         link: 'Go to First Nations charts',
-        href: '#storyline4'
+        href: 'first-nations.html#storyline4'
       },
       {
         title: '4. Compare places and measures',
         copy: 'In State Patterns, choose a state or territory, or select a heatmap row to inspect its trajectory. Switch between Admissions and Bed Days to compare the measures.',
         link: 'Go to State Patterns',
-        href: '#storyline3'
+        href: 'states.html#storyline3'
       },
       {
         title: '5. View or download the data',
         copy: 'Use View Data to open the tables for a section. Download CSV saves the complete data behind that section’s charts so you can open it in a spreadsheet.',
         link: 'Go to National Trends',
-        href: '#storyline1'
+        href: 'national.html#storyline1'
       },
       {
         title: '6. Remember privacy markers',
         copy: 'A hatched n.p. value means a small count was not published to protect confidentiality. It is not zero; the same marker is retained in the First Nations data table and CSV.',
         link: 'Go to First Nations charts',
-        href: '#storyline4'
+        href: 'first-nations.html#storyline4'
       }
     ];
     let activeTourStep = 0;

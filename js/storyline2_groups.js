@@ -12,7 +12,9 @@ function initStoryline2(roadUserData, ageData) {
   containerUsers.innerHTML = '';
   containerAge.innerHTML = '';
 
-  let activeYear = window.AppState.activeYearS2 || 2021;
+  const firstYear = 2011;
+  const lastYear = 2021;
+  let activeYear = window.AppState.activeYearS2 || firstYear;
   let activeMeasure = window.AppState.activeMeasureS2 || 'Hospitalisations';
   let isPlaying = false;
   let playInterval = null;
@@ -71,7 +73,7 @@ function initStoryline2(roadUserData, ageData) {
   const peakCalloutGroup = gAge.append('g').attr('class', 'peak-callout-layer');
 
   function updateCharts() {
-    const t = d3.transition().duration(550).ease(d3.easeCubicOut);
+    const t = d3.transition().duration(window.chartMotionDuration(550)).ease(d3.easeCubicOut);
 
     // ------------------------------------------------------------------------
     // A. Road Users Horizontal Bars
@@ -349,6 +351,7 @@ function initStoryline2(roadUserData, ageData) {
 
   if (slider && yearBadge) {
     slider.addEventListener('input', (e) => {
+      stopPlayback();
       activeYear = +e.target.value;
       yearBadge.textContent = activeYear;
       window.AppState.activeYearS2 = activeYear;
@@ -358,24 +361,36 @@ function initStoryline2(roadUserData, ageData) {
 
   if (playBtn) {
     playBtn.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      playBtn.textContent = isPlaying ? '⏸' : '▶';
-      playBtn.setAttribute('aria-label', isPlaying ? 'Pause timeline animation' : 'Play timeline animation');
-      playBtn.title = isPlaying ? 'Pause timeline animation' : 'Play timeline animation';
-
       if (isPlaying) {
-        playInterval = setInterval(() => {
-          activeYear++;
-          if (activeYear > 2021) activeYear = 2011;
-          slider.value = activeYear;
-          yearBadge.textContent = activeYear;
-          window.AppState.activeYearS2 = activeYear;
-          updateCharts();
-        }, 1150);
-      } else {
-        clearInterval(playInterval);
-        playInterval = null;
+        stopPlayback();
+        return;
       }
+
+      if (activeYear >= lastYear) {
+        activeYear = firstYear;
+        window.AppState.activeYearS2 = activeYear;
+        if (slider) slider.value = activeYear;
+        if (yearBadge) yearBadge.textContent = activeYear;
+        updateCharts();
+      }
+
+      isPlaying = true;
+      playBtn.textContent = '⏸';
+      playBtn.setAttribute('aria-label', 'Pause timeline animation');
+      playBtn.title = 'Pause timeline animation';
+      playInterval = setInterval(() => {
+        if (activeYear >= lastYear) {
+          stopPlayback();
+          return;
+        }
+
+        activeYear++;
+        if (slider) slider.value = activeYear;
+        if (yearBadge) yearBadge.textContent = activeYear;
+        window.AppState.activeYearS2 = activeYear;
+        updateCharts();
+        if (activeYear >= lastYear) stopPlayback();
+      }, 1150);
     });
   }
 
@@ -403,7 +418,7 @@ function initStoryline2(roadUserData, ageData) {
 
   window.reset2 = () => {
     stopPlayback();
-    activeYear = 2021;
+    activeYear = firstYear;
     activeMeasure = 'Hospitalisations';
     window.AppState.activeYearS2 = activeYear;
     window.AppState.activeMeasureS2 = activeMeasure;

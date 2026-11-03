@@ -17,6 +17,8 @@ function initStoryline3(stateData) {
 
   const states = ['NSW', 'Vic', 'Qld', 'WA', 'SA', 'Tas', 'ACT', 'NT'];
   const years = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021];
+  let focusedState = states[0];
+  let focusedYear = years[0];
 
   // 1. Setup Heatmap Matrix (Dark Left Pane)
   const marginHm = { top: 20, right: 16, bottom: 34, left: 50 };
@@ -101,8 +103,55 @@ function initStoryline3(stateData) {
 
   const statePointsGroup = gLine.append('g');
 
+  function localized(value) {
+    const language = document.documentElement.dataset.language || 'en';
+    return window.translateCrashMetrics
+      ? window.translateCrashMetrics(value, language)
+      : value;
+  }
+
+  function renderHeatmapTable() {
+    const tableContainer = document.getElementById('s3-heatmap-table');
+    if (!tableContainer) return;
+
+    const rows = states.map(state => {
+      const stateName = getStateFullName(state);
+      const stateLabel = localized('Select state ') + localized(stateName);
+      const cells = years.map(year => {
+        const datum = stateData.find(item => item.State === state && item.Year === year);
+        const value = datum ? window.formatNumber(datum[activeMeasure]) : '—';
+        return `<td>${value}</td>`;
+      }).join('');
+      return `<tr><th scope="row"><button type="button" class="heatmap-state-select" data-state="${state}" aria-label="${stateLabel}">${state}</button></th>${cells}</tr>`;
+    }).join('');
+
+    tableContainer.innerHTML = `
+      <table class="heatmap-values-table">
+        <caption>${localized('State and Territory values')} · ${localized(activeMeasure === 'Hospitalisations' ? 'Admissions' : 'Bed Days')}</caption>
+        <thead><tr><th scope="col">${localized('State / Year')}</th>${years.map(year => `<th scope="col">${year}</th>`).join('')}</tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+
+    tableContainer.querySelectorAll('.heatmap-state-select').forEach(button => {
+      button.addEventListener('click', () => selectState(button.dataset.state));
+    });
+  }
+
+  function setFocusedCell(state, year, shouldFocus) {
+    focusedState = state;
+    focusedYear = year;
+    const cells = gHm.selectAll('.heatmap-cell');
+    cells.attr('tabindex', -1);
+    const cell = cells
+      .filter(d => d.State === focusedState && d.Year === focusedYear)
+      .attr('tabindex', 0)
+      .node();
+    if (shouldFocus && cell) cell.focus();
+  }
+
   function updateHeatmap() {
-    const t = d3.transition().duration(500).ease(d3.easeCubicOut);
+    const t = d3.transition().duration(window.chartMotionDuration(500)).ease(d3.easeCubicOut);
 
     colorScale.interpolator(getHeatmapInterpolator());
     const maxVal = d3.max(stateData, d => d[activeMeasure]) || 1;
@@ -119,6 +168,7 @@ function initStoryline3(stateData) {
         .attr('width', xHmScale.bandwidth())
         .attr('height', yHmScale.bandwidth())
         .attr('fill', d => colorScale(d[activeMeasure]))
+        .attr('role', 'button')
         .classed('active', d => d.State === activeState)
         .style('opacity', 0)
         .call(enter => enter.transition(t).style('opacity', 1)),
@@ -128,6 +178,22 @@ function initStoryline3(stateData) {
       },
       exit => exit.remove()
     );
+
+    gHm.selectAll('.heatmap-cell')
+      .attr('tabindex', d => d.State === focusedState && d.Year === focusedYear ? 0 : -1)
+      .attr('role', 'button')
+      .attr('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown Enter Space Home End Control+Home Control+End')
+      .attr('aria-pressed', d => d.State === activeState ? 'true' : 'false')
+      .attr('aria-label', d => {
+        const language = document.documentElement.dataset.language || 'en';
+        const stateName = window.translateCrashMetrics
+          ? window.translateCrashMetrics(getStateFullName(d.State), language)
+          : getStateFullName(d.State);
+        const admissionsLabel = localized('Admissions');
+        const bedDaysLabel = localized('Bed Days');
+        const actionLabel = localized('Press Enter to select this state.');
+        return `${stateName}, ${d.Year}. ${admissionsLabel}: ${window.formatNumber(d.Hospitalisations)}. ${bedDaysLabel}: ${window.formatNumber(d.BedDays)}. ${actionLabel}`;
+      });
 
     if (activeState) {
       rowHighlight
@@ -160,9 +226,37 @@ function initStoryline3(stateData) {
       })
       .on('click', function(event, d) {
         selectState(d.State);
+        setFocusedCell(d.State, d.Year, false);
+      })
+      .on('keydown', function(event, d) {
+        const arrowKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+        const supportedKeys = [...arrowKeys, 'Home', 'End'];
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          event.stopPropagation();
+          selectState(d.State);
+          return;
+        }
+        if (!supportedKeys.includes(event.key)) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        let stateIndex = states.indexOf(d.State);
+        let yearIndex = years.indexOf(d.Year);
+        if (event.key === 'ArrowLeft') yearIndex = Math.max(0, yearIndex - 1);
+        if (event.key === 'ArrowRight') yearIndex = Math.min(years.length - 1, yearIndex + 1);
+        if (event.key === 'ArrowUp') stateIndex = Math.max(0, stateIndex - 1);
+        if (event.key === 'ArrowDown') stateIndex = Math.min(states.length - 1, stateIndex + 1);
+        if (event.key === 'Home') yearIndex = 0;
+        if (event.key === 'End') yearIndex = years.length - 1;
+        if (event.ctrlKey && event.key === 'Home') stateIndex = 0;
+        if (event.ctrlKey && event.key === 'End') stateIndex = states.length - 1;
+
+        setFocusedCell(states[stateIndex], years[yearIndex], true);
       });
 
     updateLegendCanvas(maxVal);
+    renderHeatmapTable();
     updateStateLineChart();
     if (window.refreshDataTable) window.refreshDataTable('storyline3');
   }
@@ -178,11 +272,12 @@ function initStoryline3(stateData) {
     if (badge) badge.textContent = `${activeState} Trajectory`;
 
     gHm.selectAll('.heatmap-cell')
-      .classed('active', d => d.State === activeState);
+      .classed('active', d => d.State === activeState)
+      .attr('aria-pressed', d => d.State === activeState ? 'true' : 'false');
 
     rowHighlight
       .style('display', 'block')
-      .transition().duration(280)
+      .transition().duration(window.chartMotionDuration(280))
       .attr('y', yHmScale(activeState) - 3);
 
     updateStateLineChart();
@@ -190,7 +285,7 @@ function initStoryline3(stateData) {
   }
 
   function updateStateLineChart() {
-    const t = d3.transition().duration(550).ease(d3.easeCubicOut);
+    const t = d3.transition().duration(window.chartMotionDuration(550)).ease(d3.easeCubicOut);
 
     const filtered = stateData.filter(d => d.State === activeState);
     filtered.sort((a, b) => a.Year - b.Year);
@@ -381,6 +476,7 @@ function initStoryline3(stateData) {
     attributes: true,
     attributeFilter: ['data-theme']
   });
+  window.addEventListener('crashmetrics:languagechange', updateHeatmap);
   updateHeatmap();
   selectState(activeState);
 }
