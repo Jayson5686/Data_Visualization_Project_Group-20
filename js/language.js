@@ -372,6 +372,19 @@ const languageCatalog = {
   "About the data": ["关于数据", "Perihal data", "データについて"],
   "DATA": ["数据", "DATA", "データ"],
   "A brief guide to what these visualisations include and how to interpret the figures.": ["简要介绍这些可视化所包含的内容以及如何解读数据。", "Panduan ringkas tentang kandungan visualisasi ini dan cara mentafsir angka.", "この可視化の内容と数値の解釈方法を簡単に説明します。"],
+  "Take the data with you": ["下载数据以便使用", "Muat turun data untuk digunakan", "データをダウンロード"],
+  "Download all data files": ["下载所有数据文件", "Muat turun semua fail data", "すべてのデータファイルをダウンロード"],
+  "The ZIP archive contains all seven prepared CSV datasets used by the dashboard.": [
+    "此 ZIP 压缩包包含仪表板使用的全部七个整理后 CSV 数据集。",
+    "Arkib ZIP ini mengandungi kesemua tujuh set data CSV yang disediakan dan digunakan oleh papan pemuka.",
+    "このZIPアーカイブには、ダッシュボードで使用している7つすべての整備済みCSVデータセットが含まれています。"
+  ],
+  "Download datasets (ZIP)": ["下载数据集 (ZIP)", "Muat turun set data (ZIP)", "データセットをダウンロード (ZIP)"],
+  "Download all seven data files as a ZIP archive": [
+    "将全部七个数据文件下载为 ZIP 压缩包",
+    "Muat turun kesemua tujuh fail data sebagai arkib ZIP",
+    "7つすべてのデータファイルをZIPアーカイブとしてダウンロード"
+  ],
   "Source": ["来源", "Sumber", "出典"],
   "Australian Institute of Health and Welfare (AIHW), National Hospital Morbidity Database (NHMD). The dashboard uses the project’s prepared annual datasets.": [
     "澳大利亚健康与福利研究所 (AIHW)，全国医院疾病数据库 (NHMD)。本仪表板使用项目整理的年度数据集。",

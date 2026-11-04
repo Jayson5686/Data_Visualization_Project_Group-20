@@ -1555,6 +1555,36 @@
   font-size: 0.92rem;
 }
 
+.about-data-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 0.85rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  background: var(--bg-card-recessed);
+}
+
+.about-data-download h2 {
+  margin-top: 0.2rem;
+  color: var(--ink-primary);
+  font-size: 1rem;
+}
+
+.about-data-download p {
+  margin-top: 0.35rem;
+  color: var(--ink-secondary);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.about-data-download .utility-btn {
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
 .about-data-faq {
   margin-top: 1.5rem;
   padding: 1.25rem;
@@ -2220,6 +2250,10 @@ html[data-language="ms"] .sub-card-title {
   .about-data-notes,
   .about-team-grid {
     grid-template-columns: 1fr;
+  }
+  .about-data-download {
+    align-items: flex-start;
+    flex-direction: column;
   }
   .about-suppression-note {
     padding-top: 0.9rem;
